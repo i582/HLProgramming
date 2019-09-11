@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\app">
+      <UniqueIdentifier>{b09c8b66-7365-44be-91b2-39531fb931d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\sdl_headers">
+      <UniqueIdentifier>{4f34d8ca-b200-40cd-b525-cd7d625cef83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\window">
+      <UniqueIdentifier>{94d12a20-2262-4498-aca8-30c53598857e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\window\main-window">
+      <UniqueIdentifier>{3b7aec58-5869-4a2f-83d2-24902ffb665f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\label">
+      <UniqueIdentifier>{c8322c9d-a765-496c-81e3-2c1476aefe54}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="app\app.cpp">
+      <Filter>Исходные файлы\app</Filter>
+    </ClCompile>
+    <ClCompile Include="window\window.cpp">
+      <Filter>Исходные файлы\window</Filter>
+    </ClCompile>
+    <ClCompile Include="window\main-window\main_window.cpp">
+      <Filter>Исходные файлы\window\main-window</Filter>
+    </ClCompile>
+    <ClCompile Include="label\label.cpp">
+      <Filter>Исходные файлы\label</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app\app.h">
+      <Filter>Исходные файлы\app</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl_headers\sdl_headers.h">
+      <Filter>Исходные файлы\sdl_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="window\window.h">
+      <Filter>Исходные файлы\window</Filter>
+    </ClInclude>
+    <ClInclude Include="window\main-window\main_window.h">
+      <Filter>Исходные файлы\window\main-window</Filter>
+    </ClInclude>
+    <ClInclude Include="label\label.h">
+      <Filter>Исходные файлы\label</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
