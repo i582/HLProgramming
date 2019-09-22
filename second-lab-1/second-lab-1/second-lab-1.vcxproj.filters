@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\modules">
+      <UniqueIdentifier>{413bf296-f9d9-44d3-b779-339abd31476e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\colors">
+      <UniqueIdentifier>{b74c426c-e4be-41e8-bdf8-b8ca10921f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\editor">
+      <UniqueIdentifier>{f22c63ac-5548-4452-b7e0-3c7b17f5dadd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\font">
+      <UniqueIdentifier>{4fddfab5-8131-429a-9562-6568b55707db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\sdl">
+      <UniqueIdentifier>{c9306f94-acfa-420e-9fad-f9b844c12187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\widgets">
+      <UniqueIdentifier>{f9874a72-39c8-433a-b277-d9edb3f15acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\widgets\Widget">
+      <UniqueIdentifier>{b3f66614-f98b-4c65-8283-8ceffbf0c00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\widgets\WButton">
+      <UniqueIdentifier>{29bd1e77-f091-471a-9882-54e5cda1691f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\widgets\WLabel">
+      <UniqueIdentifier>{50a57041-8138-4825-a1a9-60196a43811e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\user_events">
+      <UniqueIdentifier>{a1162309-f204-48b1-a499-1f74d535db56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\window">
+      <UniqueIdentifier>{62d4bea6-5487-41d7-b300-0d4e7cb366cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\window\main-window">
+      <UniqueIdentifier>{be26007a-a3fe-44cf-bb07-d4f399d5b43e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\colors\colors.cpp">
+      <Filter>Исходные файлы\modules\colors</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\editor\editor.cpp">
+      <Filter>Исходные файлы\modules\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\editor\editor_events.cpp">
+      <Filter>Исходные файлы\modules\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\editor\editor_user_events.cpp">
+      <Filter>Исходные файлы\modules\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\font\font.cpp">
+      <Filter>Исходные файлы\modules\font</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\widgets\base\widget.cpp">
+      <Filter>Исходные файлы\modules\widgets\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\widgets\WButton\WButton.cpp">
+      <Filter>Исходные файлы\modules\widgets\WButton</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\widgets\WLabel\WLabel.cpp">
+      <Filter>Исходные файлы\modules\widgets\WLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\user_events\user_events.cpp">
+      <Filter>Исходные файлы\modules\user_events</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\window.cpp">
+      <Filter>Исходные файлы\modules\window</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\main_window\main_window.cpp">
+      <Filter>Исходные файлы\modules\window\main-window</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\main_window\main_window_event.cpp">
+      <Filter>Исходные файлы\modules\window\main-window</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\main_window\main_window_user_event.cpp">
+      <Filter>Исходные файлы\modules\window\main-window</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\colors\colors.h">
+      <Filter>Исходные файлы\modules\colors</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\editor\editor.h">
+      <Filter>Исходные файлы\modules\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\font\font.h">
+      <Filter>Исходные файлы\modules\font</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\sdl\sdl_headers.h">
+      <Filter>Исходные файлы\modules\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\widgets\base\widget.h">
+      <Filter>Исходные файлы\modules\widgets\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\widgets\WButton\WButton.h">
+      <Filter>Исходные файлы\modules\widgets\WButton</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\widgets\WLabel\WLabel.h">
+      <Filter>Исходные файлы\modules\widgets\WLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\user_events\user_events.h">
+      <Filter>Исходные файлы\modules\user_events</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\window\window.h">
+      <Filter>Исходные файлы\modules\window</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\window\main_window\main_window.h">
+      <Filter>Исходные файлы\modules\window\main-window</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+powershell.exe -command .\build.ps1 -md main-second.md -template template-without-numbers.docx -docx ready-no-numbers-2.docx -pdf ready-no-numbers-2.pdf -embedfonts -counters

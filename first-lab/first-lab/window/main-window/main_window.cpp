@@ -37,7 +37,6 @@ void MainWindow::update()
 	SDL_Rect r = { 500, 100, 100, 100 };
 	SDL_SetRenderDrawColor(renderer, 0xc9, 0x50, 0x00, 0xff);
 	SDL_RenderDrawRect(renderer, &r);
-
 	r = { 550, 150, 75, 75 };
 	SDL_RenderDrawRect(renderer, &r);
 

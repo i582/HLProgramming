@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\viewport">
+      <UniqueIdentifier>{c9763296-dd78-469d-896a-91033fa4819f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\lib">
+      <UniqueIdentifier>{ec93da11-e5f3-4771-ba26-ed7ff3dbb0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\canvas">
+      <UniqueIdentifier>{6df9547b-8025-4ff3-819e-ba200916cad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\graph">
+      <UniqueIdentifier>{2c1d5f85-9d66-41f7-b454-46189648857b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\user_event">
+      <UniqueIdentifier>{993b98fe-6c14-4ead-ade8-7d73fc9b9a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\object">
+      <UniqueIdentifier>{f2696d56-8f7a-4a2d-9ea7-202dbe7f639e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\app">
+      <UniqueIdentifier>{dc39a279-d973-4db8-8f94-6efadc58052a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="viewport\viewport.cpp">
+      <Filter>Исходные файлы\viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="canvas\canvas.cpp">
+      <Filter>Исходные файлы\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="graph\graph.cpp">
+      <Filter>Исходные файлы\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lib.cpp">
+      <Filter>Исходные файлы\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="user_event\user_event.cpp">
+      <Filter>Исходные файлы\user_event</Filter>
+    </ClCompile>
+    <ClCompile Include="object\object.cpp">
+      <Filter>Исходные файлы\object</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Исходные файлы\app</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="viewport\viewport.h">
+      <Filter>Исходные файлы\viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lib.h">
+      <Filter>Исходные файлы\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="canvas\canvas.h">
+      <Filter>Исходные файлы\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="graph\graph.h">
+      <Filter>Исходные файлы\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="user_event\user_event.h">
+      <Filter>Исходные файлы\user_event</Filter>
+    </ClInclude>
+    <ClInclude Include="object\object.h">
+      <Filter>Исходные файлы\object</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Исходные файлы\app</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

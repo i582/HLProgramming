@@ -13,6 +13,8 @@ Window::Window(string title, SDL_Rect size, Uint32 flags)
 
 	this->mouse = { 0, 0 };
 
+	this->window_id = 0;
+
 	this->init();
 }
 
@@ -24,10 +26,10 @@ Window::~Window()
 
 bool Window::init()
 {
-	this->window = SDL_CreateWindow("SDL2: Magic Events", 
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		480, 640, SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE);
+	this->window = SDL_CreateWindow(title.c_str(), 
+		size.x == -1 ? SDL_WINDOWPOS_CENTERED : size.x, 
+		size.y == -1 ? SDL_WINDOWPOS_CENTERED : size.y, 
+		size.w, size.h, flags);
 
 	if (window == nullptr)
 	{
@@ -41,6 +43,10 @@ bool Window::init()
 		cout << "Renderer could not be created! SDL Error: %s\n" << SDL_GetError();
 		return false;
 	}
+
+	this->window_id = SDL_GetWindowID(window);
+
+	SDL_GetWindowPosition(window, &size.x, &size.y);
 
 	return true;
 }
@@ -80,4 +86,25 @@ SDL_Renderer* Window::get_renderer()
 SDL_Window* Window::get_window()
 {
 	return window;
+}
+
+vector<Widget*>* Window::get_widgets()
+{
+	return &widgets;
+}
+
+int Window::get_window_id()
+{
+	return window_id;
+}
+
+Widget* const Window::createWidget(Widget* el)
+{
+	widgets.push_back(el);
+	return el;
+}
+
+int Window::SDL_SetRenderColor(SDL_Renderer* renderer, SDL_Color& color)
+{
+	return SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 }

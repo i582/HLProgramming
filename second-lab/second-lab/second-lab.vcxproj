@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{161E3128-725A-4196-B2C9-F3C04760C70D}</ProjectGuid>
-    <RootNamespace>firstlab</RootNamespace>
+    <ProjectGuid>{70D6C060-AAB5-4C30-94A6-26AE70744FB5}</ProjectGuid>
+    <RootNamespace>secondlab</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -75,14 +75,15 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions); _CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies);SDL2_ttf.lib;</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies);SDL2_ttf.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,18 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app\app.cpp" />
-    <ClCompile Include="label\label.cpp" />
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="window\main-window\main_window.cpp" />
-    <ClCompile Include="window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="app\app.h" />
-    <ClInclude Include="label\label.h" />
-    <ClInclude Include="sdl_headers\sdl_headers.h" />
-    <ClInclude Include="window\main-window\main_window.h" />
-    <ClInclude Include="window\window.h" />
+    <ClInclude Include="app.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

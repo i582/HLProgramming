@@ -27,12 +27,13 @@ private:
 	SDL_Event e;
 
 
-public:
+private:
 	bool init();
 	void setup();
 	void update();
 	void on_event();
 	void quit();
 
+public:
 	int run();
 };

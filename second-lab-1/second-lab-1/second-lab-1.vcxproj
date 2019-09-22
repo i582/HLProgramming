@@ -18,10 +18,38 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="modules\colors\colors.cpp" />
+    <ClCompile Include="modules\editor\editor.cpp" />
+    <ClCompile Include="modules\editor\editor_events.cpp" />
+    <ClCompile Include="modules\editor\editor_user_events.cpp" />
+    <ClCompile Include="modules\font\font.cpp" />
+    <ClCompile Include="modules\user_events\user_events.cpp" />
+    <ClCompile Include="modules\widgets\base\widget.cpp" />
+    <ClCompile Include="modules\widgets\WButton\WButton.cpp" />
+    <ClCompile Include="modules\widgets\WLabel\WLabel.cpp" />
+    <ClCompile Include="modules\window\main_window\main_window.cpp" />
+    <ClCompile Include="modules\window\main_window\main_window_event.cpp" />
+    <ClCompile Include="modules\window\main_window\main_window_user_event.cpp" />
+    <ClCompile Include="modules\window\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\colors\colors.h" />
+    <ClInclude Include="modules\editor\editor.h" />
+    <ClInclude Include="modules\font\font.h" />
+    <ClInclude Include="modules\sdl\sdl_headers.h" />
+    <ClInclude Include="modules\user_events\user_events.h" />
+    <ClInclude Include="modules\widgets\base\widget.h" />
+    <ClInclude Include="modules\widgets\WButton\WButton.h" />
+    <ClInclude Include="modules\widgets\WLabel\WLabel.h" />
+    <ClInclude Include="modules\window\main_window\main_window.h" />
+    <ClInclude Include="modules\window\window.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{161E3128-725A-4196-B2C9-F3C04760C70D}</ProjectGuid>
-    <RootNamespace>firstlab</RootNamespace>
+    <ProjectGuid>{38B893AA-78B4-4EE6-8B7A-7A05BBFF2AD1}</ProjectGuid>
+    <RootNamespace>secondlab1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -75,14 +103,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies);SDL2_ttf.lib;</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies);SDL2_ttf.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,20 +154,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="app\app.cpp" />
-    <ClCompile Include="label\label.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="window\main-window\main_window.cpp" />
-    <ClCompile Include="window\window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="app\app.h" />
-    <ClInclude Include="label\label.h" />
-    <ClInclude Include="sdl_headers\sdl_headers.h" />
-    <ClInclude Include="window\main-window\main_window.h" />
-    <ClInclude Include="window\window.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

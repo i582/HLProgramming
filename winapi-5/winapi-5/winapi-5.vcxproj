@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{161E3128-725A-4196-B2C9-F3C04760C70D}</ProjectGuid>
-    <RootNamespace>firstlab</RootNamespace>
+    <ProjectGuid>{854B2444-8D44-4021-9991-A26C52194288}</ProjectGuid>
+    <RootNamespace>winapi5</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -69,20 +69,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\SDL2\SDL2_gfx;C:\SDL2\SDL2_ttf-2.0.15\include;C:\SDL2\SDL2_image-2.0.4\include;C:\SDL2\include;$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>C:\SDL2\SDL2_ttf-2.0.15\lib\x86;C:\SDL2\SDL2_image-2.0.4\lib\x86;C:\SDL2\lib\x86;$(LibraryPath)$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies);SDL2_ttf.lib;</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -94,6 +93,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,18 +127,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app\app.cpp" />
-    <ClCompile Include="label\label.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="canvas\canvas.cpp" />
+    <ClCompile Include="graph\graph.cpp" />
+    <ClCompile Include="lib\lib.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="window\main-window\main_window.cpp" />
-    <ClCompile Include="window\window.cpp" />
+    <ClCompile Include="object\object.cpp" />
+    <ClCompile Include="user_event\user_event.cpp" />
+    <ClCompile Include="viewport\viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="app\app.h" />
-    <ClInclude Include="label\label.h" />
-    <ClInclude Include="sdl_headers\sdl_headers.h" />
-    <ClInclude Include="window\main-window\main_window.h" />
-    <ClInclude Include="window\window.h" />
+    <ClInclude Include="App.h" />
+    <ClInclude Include="canvas\canvas.h" />
+    <ClInclude Include="graph\graph.h" />
+    <ClInclude Include="lib\lib.h" />
+    <ClInclude Include="object\object.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="user_event\user_event.h" />
+    <ClInclude Include="viewport\viewport.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bitmap1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
