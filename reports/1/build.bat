@@ -1,0 +1,1 @@
+﻿powershell.exe -command  ..\scripts\build.ps1 -md main.md -template ..\templates\template.docx -number 1 -title SDL20 -docx ready\lab-1.docx -pdf ready\lab-1.pdf -embedfonts -counters

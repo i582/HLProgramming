@@ -4,8 +4,23 @@ param (
     [string]$docx,
     [string]$pdf,
     [switch]$embedfonts,
-    [switch]$counters
+    [switch]$counters,
+
+    [string]$number,
+    [string]$title
 )
+
+if ([string]::IsNullOrEmpty($number))
+{
+    Write-error "-number must be"
+    exit 113
+}
+
+if ([string]::IsNullOrEmpty($title))
+{
+    Write-error "-title must be"
+    exit 113
+}
 
 if ([string]::IsNullOrEmpty($docx) -and [string]::IsNullOrEmpty($pdf))
 {
@@ -92,6 +107,26 @@ if ($selection.Find.Execute("%MAINTEXT%^13", $True, $True, $False, $False, $Fals
     $selection.Delete() | out-null
   }
 }
+
+write-host "Inserting number..."
+if ($selection.Find.Execute("%NUMBER%^13", $True, $True, $False, $False, $False, $True, `
+       [Microsoft.Office.Interop.Word.wdFindWrap]::wdFindContinue, $False, "",   `
+       [Microsoft.Office.Interop.Word.wdReplace]::wdReplaceNone))
+{
+    $selection.TypeText($number)
+}
+
+
+write-host "Inserting title..."
+if ($selection.Find.Execute("%TITLE%", $True, $True, $False, $False, $False, $True, `
+       [Microsoft.Office.Interop.Word.wdFindWrap]::wdFindContinue, $False, "",   `
+       [Microsoft.Office.Interop.Word.wdReplace]::wdReplaceNone))
+{
+    write-host "find..."
+    $selection.TypeText($title)
+}
+
+
 
 write-host "Searching styles..."
 foreach ($style in $doc.Styles)

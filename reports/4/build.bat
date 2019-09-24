@@ -1,0 +1,1 @@
+powershell.exe -command .\build.ps1 -md main.md -template template.docx -docx ready.docx -pdf ready.pdf -embedfonts -counters

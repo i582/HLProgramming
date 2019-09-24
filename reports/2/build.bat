@@ -1,0 +1,1 @@
+powershell.exe -command ..\scripts\build.ps1 -md main.md -template ..\templates\template.docx -docx ready\lab-2.docx -pdf ready\lab-2.pdf -embedfonts -counters
