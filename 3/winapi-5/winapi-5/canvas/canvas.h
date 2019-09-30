@@ -4,6 +4,9 @@
 
 #include "../object/object.h"
 
+#include "../command/DeletePointCommand/DeletePointCommand.h"
+#include "../command/AddPointCommand/AddPointCommand.h"
+
 class Viewport;
 
 class Canvas : public Object
@@ -13,6 +16,11 @@ private:
 	Graph* graph;
 	Point start_point;
 
+	HFONT font;
+
+private:
+	bool need_update_graph;
+
 public:
 	Canvas(HWND hwnd, HDC parent_hdc, Viewport* parent, Rect size);
 
@@ -20,22 +28,26 @@ public:
 	void render();
 	void setup();
 
+	
 	Point coord_adjust_by_start_point(Point p);
 	Point back_coord_adjust_by_start_point(Point p);
 
 private:
-	void draw_left_branch(const double& each, const int& scale_size, const HFONT& hFont);
-	void draw_right_branch(const double& each, const int& scale_size, const HFONT& hFont);
-	void draw_bottom_branch(const double& each, const int& scale_size, const HFONT& hFont);
-	void draw_top_branch(const double& each, const int& scale_size, const HFONT& hFont);
+	void draw_left_branch(const double& each, const double& scale_size, const HFONT& hFont);
+	void draw_right_branch(const double& each, const double& scale_size, const HFONT& hFont);
+	void draw_bottom_branch(const double& each, const double& scale_size, const HFONT& hFont);
+	void draw_top_branch(const double& each, const double& scale_size, const HFONT& hFont);
 
 
 public: _set
+
 	void set_start_point(Point coord);
 	void shift_start_point(int dx, int dy);
 
 public: _get
 	Point get_start_point();
+
+	Graph* get_graph();
 
 public: _event
 	void mouseButtonDown(Event* e);

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\modules">
+      <UniqueIdentifier>{edb0c5ce-ac14-4f69-9e7d-986ee6af7f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\app">
+      <UniqueIdentifier>{139307ab-1a99-47c2-817c-42636f740ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\NIA">
+      <UniqueIdentifier>{ad7bf005-9432-4905-b46b-b711ba80d019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\object">
+      <UniqueIdentifier>{be634a95-c2e1-414a-a2a6-079942dfec2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\object\viewport">
+      <UniqueIdentifier>{95bce74f-bc08-485b-a13c-ac7a60e70507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\modules\graph">
+      <UniqueIdentifier>{3e5ffd27-df87-4684-8098-a92c15ea3e8e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\app\app.h">
+      <Filter>Исходные файлы\modules\app</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA.h">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\object\object.h">
+      <Filter>Исходные файлы\modules\object</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\graph\graph.h">
+      <Filter>Исходные файлы\modules\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\object\viewport\viewport.h">
+      <Filter>Исходные файлы\modules\object\viewport</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="modules\main.cpp">
+      <Filter>Исходные файлы\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\app\app.cpp">
+      <Filter>Исходные файлы\modules\app</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\object\object.cpp">
+      <Filter>Исходные файлы\modules\object</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\graph\graph.cpp">
+      <Filter>Исходные файлы\modules\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\object\viewport\viewport.cpp">
+      <Filter>Исходные файлы\modules\object\viewport</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

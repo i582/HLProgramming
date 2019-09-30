@@ -9,7 +9,7 @@ Point NIA_GetCursorPosition()
 {
 	POINT p;
 	GetCursorPos(&p);
-	return { p.x, p.y };
+	return { (double)p.x, (double)p.y };
 }
 
 void NIA_GetCursorPosition(HDC hdc, Point* p)
@@ -30,7 +30,7 @@ void NIA_GetCursorPositionByEvent(Event* e, Point* p)
 
 bool NIA_PointInRect(POINT p, RECT* r)
 {
-	return PtInRect(r, p) ;
+	return PtInRect(r, p);
 }
 
 bool NIA_PointInCircle(Point p, Point center, int rad)
@@ -43,7 +43,7 @@ void NIA_SetHdcBitmap(HDC dst_hdc, HBITMAP dst_bitmap)
 	SelectObject(dst_hdc, dst_bitmap);
 }
 
-void NIA_BlitBitmap(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst)
+void NIA_BitmapCopy(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst)
 {
 	SetStretchBltMode(dst_hdc, COLORONCOLOR);
 
@@ -84,17 +84,23 @@ void NIA_DrawLine(HDC dst_hdc, Line line_, HexColor color, int thickness)
 	DeleteObject(pen);
 }
 
-void NIA_FillEllipse(HDC dst_hdc, Point point, int radius, HexColor color)
+void NIA_FillEllipse(HDC dst_hdc, Point point, int radius, HexColor color, HexColor border = 0x000000, int thickness = 0)
 {
 
 	LOGBRUSH br;
 	br.lbStyle = BS_SOLID;
 	br.lbColor = color;
 	HBRUSH brush;
-	brush = CreateBrushIndirect(&br);
+	HPEN pen;
+	pen = CreatePen(PS_SOLID, thickness, border);
+	brush = CreateSolidBrush(color);
+	SelectBrush(dst_hdc, brush);
+	SelectPen(dst_hdc, pen);
+	//brush = CreateBrushIndirect(&br);
 	Ellipse(dst_hdc, point.x - radius, point.y - radius, point.x + radius, point.y + radius);
 
 	DeleteObject(brush);
+	DeleteObject(pen);
 }
 
 HFONT NIA_LoadFont(wstring name, int size)
@@ -111,6 +117,121 @@ void NIA_DrawFont(HDC dst_hdc, HFONT font, wstring text, Rect size)
 {
 	SelectFont(dst_hdc, font);
 	ExtTextOut(dst_hdc, size.x, size.y, ETO_CLIPPED, NULL, text.c_str(), text.length(), NULL);
+}
+
+wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter)
+{
+	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
+
+	WCHAR path[255] = L"\0";
+
+
+
+	of->lStructSize = sizeof(OPENFILENAME);
+	of->hwndOwner = hwnd;
+	of->hInstance = NULL;
+	of->lpstrFilter = filter;
+	of->lpstrCustomFilter = NULL;
+	of->nMaxCustFilter = NULL;
+	of->nFilterIndex = 1;
+	of->lpstrFile = path;
+	of->nMaxFile = 256;
+	of->lpstrFileTitle = NULL;
+	of->nMaxFileTitle = NULL;
+	of->lpstrInitialDir = NULL;
+	of->lpstrTitle = NULL;
+
+	of->Flags = OFN_FILEMUSTEXIST | OFN_EXPLORER;
+	of->nFileOffset = NULL;
+	of->nFileExtension = NULL;
+	of->lpstrDefExt = NULL;
+	of->lCustData = NULL;
+	of->lpfnHook = NULL;
+	of->lpTemplateName = NULL;
+
+	GetOpenFileName(of);
+	
+	free(of);
+
+	wstring path_string = path;
+	return path_string;
+}
+
+
+wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter)
+{
+	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
+
+	WCHAR path[255] = L"\0";
+
+	of->lStructSize = sizeof(OPENFILENAME);
+	of->hwndOwner = hwnd;
+	of->hInstance = NULL;
+	of->lpstrFilter = filter;
+	of->lpstrCustomFilter = NULL;
+	of->nMaxCustFilter = NULL;
+	of->nFilterIndex = NULL;
+	of->lpstrFile = path;
+	of->nMaxFile = 256;
+	of->lpstrFileTitle = NULL;
+	of->nMaxFileTitle = NULL;
+	of->lpstrInitialDir = NULL;
+	of->lpstrTitle = NULL;
+
+	of->Flags = NULL;
+	of->nFileOffset = NULL;
+	of->nFileExtension = NULL;
+	of->lpstrDefExt = NULL;
+	of->lCustData = NULL;
+	of->lpfnHook = NULL;
+	of->lpTemplateName = NULL;
+
+	GetSaveFileName(of);
+
+	free(of);
+
+	wstring path_string = path;
+	return path_string;
+}
+
+HANDLE NIA_OpenFile(wstring path, DWORD dwAccess, DWORD dwShareMode)
+{
+	return CreateFile(path.c_str(), dwAccess, dwShareMode, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+}
+
+void* NIA_ReadFile(HWND hwnd, LPCWSTR filter)
+{
+	wstring path = NIA_ShowOpenFileDialog(hwnd, filter);
+
+	HANDLE file = NIA_OpenFile(path);
+
+	DWORD file_size;
+	file_size = GetFileSize(file, nullptr);
+
+	char* buffer = new char[file_size + 10];
+
+	DWORD count_read;
+
+	ReadFile(file, buffer, file_size, &count_read, nullptr);
+
+	buffer[count_read] = '\0';
+
+	CloseHandle(file);
+
+	return buffer;
+}
+
+void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count)
+{
+	wstring path = NIA_ShowSaveFileDialog(hwnd, filter);
+
+	HANDLE file = NIA_OpenFile(path);
+
+	DWORD count_read;
+
+	WriteFile(file, buffer, count, &count_read, nullptr);
+
+	CloseHandle(file);
 }
 
 

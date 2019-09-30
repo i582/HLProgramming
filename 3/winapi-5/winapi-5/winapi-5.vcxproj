@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -42,7 +42,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -92,7 +92,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
@@ -129,28 +129,42 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="canvas\canvas.cpp" />
+    <ClCompile Include="command\AddPointCommand\AddPointCommand.cpp" />
+    <ClCompile Include="command\DeletePointCommand\DeletePointCommand.cpp" />
+    <ClCompile Include="graph\graph-point.cpp" />
     <ClCompile Include="graph\graph.cpp" />
     <ClCompile Include="lib\lib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="object\object.cpp" />
     <ClCompile Include="user_event\user_event.cpp" />
     <ClCompile Include="viewport\viewport.cpp" />
+    <ClCompile Include="window\main-window\main-window.cpp" />
+    <ClCompile Include="window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="canvas\canvas.h" />
+    <ClInclude Include="command\AddPointCommand\AddPointCommand.h" />
+    <ClInclude Include="command\command.h" />
+    <ClInclude Include="command\DeletePointCommand\DeletePointCommand.h" />
+    <ClInclude Include="graph\graph-point.h" />
     <ClInclude Include="graph\graph.h" />
     <ClInclude Include="lib\lib.h" />
     <ClInclude Include="object\object.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="user_event\user_event.h" />
     <ClInclude Include="viewport\viewport.h" />
+    <ClInclude Include="window\main-window\main-window.h" />
+    <ClInclude Include="window\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

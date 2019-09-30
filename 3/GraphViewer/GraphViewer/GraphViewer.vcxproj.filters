@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\app">
+      <UniqueIdentifier>{d95bc4f8-431d-4934-a19b-2b487258e4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\nia_lib">
+      <UniqueIdentifier>{03caca63-d3e6-4778-ab7d-77f9f0e59956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\uEvent">
+      <UniqueIdentifier>{cf736593-3381-40eb-a003-2e59c4b9d68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\command">
+      <UniqueIdentifier>{4b5759d4-aecb-4155-9bfa-b44a98fa82f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\command\DeletePointCommand">
+      <UniqueIdentifier>{651ae8b1-9698-42b1-8879-da63dc8bb1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\command\AddPointCommand">
+      <UniqueIdentifier>{d90cc5eb-eb65-402b-b3ae-3d282ca13ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\objects">
+      <UniqueIdentifier>{cbd45987-af21-464c-9e35-42feff5be579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\objects\canvas">
+      <UniqueIdentifier>{7ee32748-80ad-4554-90be-d010d0425e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\objects\viewport">
+      <UniqueIdentifier>{06201a57-48ec-42c4-9d6a-757ddb9b7181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\objects\graph">
+      <UniqueIdentifier>{7f8ae6dc-0808-4d2f-ad87-3d07c5d4cd8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\window">
+      <UniqueIdentifier>{51ab4e10-5306-40ef-b89f-58df478b7df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\window\main">
+      <UniqueIdentifier>{f667de0a-a008-44b7-aed1-3b6cdce2f567}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\nia_lib\nia_lib.cpp">
+      <Filter>Исходные файлы\nia_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\uEvent\user_event.cpp">
+      <Filter>Исходные файлы\uEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\command\AddPointCommand\AddPointCommand.cpp">
+      <Filter>Исходные файлы\command\AddPointCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\command\DeletePointCommand\DeletePointCommand.cpp">
+      <Filter>Исходные файлы\command\DeletePointCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\window.cpp">
+      <Filter>Исходные файлы\window</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\app\app.cpp">
+      <Filter>Исходные файлы\app</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\window\main\main-window.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\app\app.h">
+      <Filter>Исходные файлы\app</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\nia_lib\nia_lib.h">
+      <Filter>Исходные файлы\nia_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\uEvent\user_event.h">
+      <Filter>Исходные файлы\uEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\command\command.h">
+      <Filter>Исходные файлы\command</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\command\AddPointCommand\AddPointCommand.h">
+      <Filter>Исходные файлы\command\AddPointCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\command\DeletePointCommand\DeletePointCommand.h">
+      <Filter>Исходные файлы\command\DeletePointCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\window\window.h">
+      <Filter>Исходные файлы\window</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\window\main\main-window.h">
+      <Filter>Исходные файлы\window\main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

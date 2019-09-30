@@ -8,11 +8,15 @@ class Viewport : public Object
 {
 private:
 	Canvas* canvas;
-
-	int scale;
+	HFONT font;
+	double scale;
 
 public:
-	Viewport(HWND hwnd, HDC parent_hdc, Rect size) : Object(hwnd, parent_hdc, size) { this->setup(); };
+	Viewport(HWND hwnd, HDC parent_hdc, Rect size) : Object(hwnd, parent_hdc, size) 
+	{ 
+		this->scale = 1;
+		this->setup(); 
+	};
 
 
 public:
@@ -20,10 +24,10 @@ public:
 	void setup();
 
 public: _set
-	void shift_scale(int dx);
+	void shift_scale(double dx);
 
 public: _get
-	int get_scale();
+	double get_scale();
 	Canvas* get_canvas();
 
 public: _event

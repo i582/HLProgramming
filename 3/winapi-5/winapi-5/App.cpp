@@ -3,17 +3,73 @@
 App* App::instance = nullptr;
 vector <UEvent*> App::events = {};
 
+vector <Command*> App::commands = {};
+int App::now_command = -1;
+
+
 UEvent* App::push_event(UEvent* ev)
 {
 	events.push_back(ev);
 	return ev;
 }
 
-App::App()
+Command* App::push_command(Command* command)
 {
-	this->width = 1200;
-	this->height = 700;
+	int count = commands.size() - 1;
+	if (now_command < count)
+	{
+		for (size_t i = 0; i < count - now_command; i++)
+		{
+			commands.pop_back();
+		}
+	}
+
+	commands.push_back(command);
+	command->execute();
+	now_command++;
+
+	App::get_instance()->update();
+
+	return command;
 }
+
+void App::undo()
+{
+	if (now_command >= 0)
+	{
+		commands.at(now_command)->unexecute();
+		App::get_instance()->update();
+		now_command--;
+	}
+	else
+	{
+		MessageBox(NULL, L"Начало очереди", L"Click", MB_ICONINFORMATION);
+	}
+}
+
+void App::redo()
+{
+	int count = commands.size() - 1;
+	if (now_command < count)
+	{
+		now_command++;
+		commands.at(now_command)->execute();
+
+		App::get_instance()->update();
+
+	}
+	else
+	{
+		MessageBox(NULL, L"Конец очереди", L"Click", MB_ICONINFORMATION);
+	}
+}
+
+void App::clear_commands()
+{
+	App::commands.clear();
+	App::now_command = -1;
+}
+
 
 App* App::get_instance()
 {
@@ -23,17 +79,23 @@ App* App::get_instance()
 	return instance;
 }
 
-App::~App()
+App::App()
 {
+	this->width = 1200;
+	this->height = 700;
 }
 
 int App::init()
 {
+
+	//window = new MainWindow(L"hello", { 100, 100, 1000, 400 });
+
+
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wc.hCursor = 0;
+	wc.hbrBackground = CreateSolidBrush(0xffffff);
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hIcon = 0;
 	wc.hIconSm = 0;
 	wc.hInstance = nullptr;
@@ -68,32 +130,12 @@ int App::init()
 
 void App::setup()
 {
-	/*button = CreateWindowEx(
-		0,
-		L"Button", L"Ввод",
-		WS_CHILD | BS_PUSHBUTTON | WS_VISIBLE,
-		100, 100, 70, 30, hwnd, (HMENU)(App::OBJECTS_ID::ENTER_BUTTON),
-		nullptr, nullptr);
-
-	input = CreateWindowEx(
-		WS_EX_CLIENTEDGE,
-		L"Edit", L"11",
-		WS_CHILD | ES_AUTOHSCROLL | WS_VISIBLE,
-		100, 160, 70, 20, hwnd, (HMENU)(App::OBJECTS_ID::INPUT),
-		nullptr, nullptr);
-
-	input1 = CreateWindowEx(
-		WS_EX_CLIENTEDGE,
-		L"Edit", L"11",
-		WS_CHILD | ES_AUTOHSCROLL | WS_VISIBLE,
-		100, 200, 70, 20, hwnd, (HMENU)(App::OBJECTS_ID::INPUT),
-		nullptr, nullptr);
-*/
-
 	hdc = GetDC(hwnd);
 	viewport = new Viewport(hwnd, hdc, { 30, 30, 1000, 580 });
 
 
+	RegisterHotKey(hwnd, 0, MOD_CONTROL, NIA_KEY_Z); // z key
+	RegisterHotKey(hwnd, 1, MOD_SHIFT | MOD_CONTROL, NIA_KEY_Z); // z key
 
 
 	AppendMenu((hFileMenu = CreatePopupMenu()), MF_ENABLED | MF_STRING, OPEN_FILE, L"&Открыть");
@@ -104,8 +146,6 @@ void App::setup()
 	AppendMenu(hMenu, MF_ENABLED | MF_POPUP, (UINT)hHelpMenu, L"&Помощь");
 
 
-
-	//AppendMenu(hFileMenu, MF_SEPARATOR | MF_POPUP, (UINT)5, L"");
 	AppendMenu(hFileMenu, MF_SEPARATOR, NULL, NULL);
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_DELETE, L"&Включить удаление");
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_ADD, L"&Включить добавление");
@@ -115,31 +155,29 @@ void App::setup()
 	UpdateWindow(hwnd);
 
 
+	font = NIA_LoadFont(L"OpenSans", 16);
+
+	input1 = CreateWindowEx(
+		NULL,
+		L"Edit", L"",
+		WS_CHILD | ES_AUTOHSCROLL | WS_VISIBLE | DS_SETFONT,
+		30, 10, 100, 20, hwnd, (HMENU)(11),
+		nullptr, nullptr);
+
+	SendMessage(input1, WM_SETFONT, (WPARAM)font, TRUE);
+
+}
+
+void App::update()
+{
+	viewport->render();
 }
 
 LRESULT App::StaticWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	App* app;
-
-	if (uMsg == WM_CREATE)
+	if (instance != nullptr)
 	{
-		app = (App*)((CREATESTRUCT*)lParam)->lpCreateParams;
-		SetLastError(0);
-		if (!SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)app))
-		{
-			if (GetLastError() != 0)
-				return 0;
-		}
-	}
-	else
-	{
-		app = (App*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-	}
-
-	if (app != nullptr)
-	{
-		app->hwnd = hwnd;
-		return app->WndProc(hwnd, uMsg, wParam, lParam);
+		return instance->WndProc(hwnd, uMsg, wParam, lParam);
 	}
 
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -154,6 +192,9 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	switch (uMsg)
 	{
+
+
+	
 
 	case WM_PAINT:
 	{
@@ -177,19 +218,35 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
+	case WM_HOTKEY:
+	{
+
+		if (LOWORD(lParam) == MOD_CONTROL && HIWORD(lParam) == NIA_KEY_Z)
+		{
+			App::undo();
+		}
+		else if (LOWORD(lParam) == (MOD_CONTROL | MOD_SHIFT) && HIWORD(lParam) == NIA_KEY_Z)
+		{
+			App::redo();
+		}
+
+		break;
+	}
+
+
 	case WM_MOUSEMOVE:
 	{
-		if (wParam == MK_LBUTTON)
+		if (wParam == (MK_LBUTTON))
 		{
-			NIA_GetCursorPosition(hdc, &mouse);
+			NIA_GetCursorPositionByEvent(&e, &mouse);
 
-			int dx = mouse.x - mouse_prev.x;
-			int dy = mouse.y - mouse_prev.y;
+			int dx = (int)(mouse.x - mouse_prev.x) % 100;
+			int dy = (int)(mouse.y - mouse_prev.y) % 100;
 			
 			viewport->get_canvas()->shift_start_point(dx, dy);
 			viewport->render();
 
-			NIA_GetCursorPosition(hdc, &mouse_prev);
+			NIA_GetCursorPositionByEvent(&e, &mouse_prev);
 		}
 		break;
 	}
@@ -199,8 +256,14 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		int rel = GET_WHEEL_DELTA_WPARAM(wParam);
 
 		
-		viewport->shift_scale(rel / 100);
+		
+		viewport->shift_scale(rel / 120.);
 		viewport->render();
+
+
+		wstring scale_text = to_wstring(viewport->get_scale());
+		scale_text = scale_text.substr(0, scale_text.find('.') + 2) + L"%";
+		SetWindowText(input1, scale_text.c_str());
 
 		break;
 	}
@@ -211,46 +274,29 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		switch (LOWORD(wParam))
 		{
 
-		case SAVE_FILE:
+		case OPEN_FILE:
 		{
 
-			OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
+			char* buffer;
 
-			wstring filter = L"PNG files(*.png)\0*.png\0All files(*.*)\0*.*\0\0";
+			buffer = (char*)NIA_ReadFile(hwnd, L"txt files(*.txt)\0*.txt\0");
 
-			WCHAR path[255] = L"\0";
+			string str(buffer);
 
-			of->lStructSize = sizeof(OPENFILENAME);
-			of->hwndOwner = hwnd;
-			of->hInstance = NULL;
-			of->lpstrFilter = filter.c_str();
-			of->lpstrCustomFilter = NULL;
-			of->nMaxCustFilter = NULL;
-			of->nFilterIndex = NULL;
-			of->lpstrFile = path;
-			of->nMaxFile = 256;
-			of->lpstrFileTitle = NULL;
-			of->nMaxFileTitle = NULL;
-			of->lpstrInitialDir = NULL;
-			of->lpstrTitle = NULL;
+			vector<Point>* points = new vector<Point>;
+			*points = split_str(str);
 
-			of->Flags = NULL;
-			of->nFileOffset = NULL;
-			of->nFileExtension = NULL;
-			of->lpstrDefExt = NULL;
-			of->lCustData = NULL;
-			of->lpfnHook = NULL;
-			of->lpTemplateName = NULL;
+			App::push_event(new UEvent(C_APP, R_GRAPH, SET_POINTS, -1, points));
+			App::clear_commands();
+			update();
+			delete buffer;
+			
+			break;
+		}
 
-			if (GetSaveFileName(of))
-			{
-				MessageBox(NULL, path, L"Click", MB_ICONINFORMATION);
-			}
-			else
-			{
-				MessageBox(NULL, to_wstring(GetLastError()).c_str(), L"Click", MB_ICONINFORMATION);
-				
-			}
+		case SAVE_FILE:
+		{
+			App::push_event(new UEvent(C_APP, R_GRAPH, GET_POINTS, -1));
 
 			break;
 		}
@@ -287,7 +333,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		PostQuitMessage(EXIT_SUCCESS);
 
-		return EXIT_SUCCESS;
+		return 0;
 	}
 
 	}
@@ -308,12 +354,13 @@ void App::HandleUserEvent()
 		if (FilterUserEvent(ue))
 		{
 			viewport->notify(ue);
+			this->notify(ue);
 		}
 		
-		
+		if (viewport != nullptr)
+			viewport->render();
 	}
-	if (viewport != nullptr)
-		viewport->render();
+
 }
 
 bool App::FilterUserEvent(UEvent* ue)
@@ -336,6 +383,62 @@ bool App::FilterUserEvent(UEvent* ue)
 	
 
 	return true;
+}
+
+vector<Point> App::split_str(string str)
+{
+	vector <Point> points;
+
+	int x = 0, y = 0;
+	string temp;
+	for (size_t i = 0; i < str.length(); i++)
+	{
+
+		if (str[i] == ' ')
+		{
+			x = atoi(temp.c_str());
+			temp = "";
+			continue;
+		}
+		else if (str[i] == '\r' && str[i + 1] == '\n')
+		{
+			y = atoi(temp.c_str());
+			points.push_back({ (double)x, (double)y });
+			i += 1;
+			temp = "";
+
+			
+			continue;
+		}
+		else if (i == str.length() - 1)
+		{
+			temp += str[i];
+			y = atoi(temp.c_str());
+			points.push_back({ (double)x, (double)y });
+			i += 1;
+			temp = "";
+			continue;
+		}
+
+
+		temp += str[i];
+	}
+
+	return points;
+}
+
+void App::notify(UEvent* ue)
+{
+	if (!ue->common.recipient == R_APP)
+		return;
+
+	if (ue->common.action == SAVE_POINTS)
+	{
+		string* data = (string*)ue->common.data;
+		NIA_WriteFile(hwnd, L"txt files(*.txt)\0*.txt\0", (char*)data->c_str(), data->size());
+		MessageBox(NULL, L"Файл сохранен!", L"Сохранение успешно", MB_ICONINFORMATION);
+	}
+
 }
 
 int App::run()

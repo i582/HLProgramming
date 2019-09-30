@@ -1,0 +1,7 @@
+w// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define _get
+#define _interface
+#define _extend
+#define _extend

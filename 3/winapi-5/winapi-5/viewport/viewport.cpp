@@ -9,19 +9,21 @@ void Viewport::render()
 	canvas->render();
 
 
-	HFONT hFont = NIA_LoadFont(L"Open Sans", 20);
-	NIA_DrawFont(hdc, hFont, to_wstring(scale), { 10, 10, 0, 0 });
+	/*SetTextColor(hdc, 0xffffff);
+	SetBkColor(hdc, 0x282828);
+	NIA_DrawFont(hdc, font, to_wstring(scale).substr(0, to_wstring(scale).find('.') + 2), { 10, 10, 0, 0 });*/
 
 
-	NIA_BlitBitmap(parent_hdc, hdc, nullptr, &size);
+	NIA_BitmapCopy(parent_hdc, hdc, nullptr, &size);
 }
 
 void Viewport::setup()
 {
-	canvas = new Canvas(hwnd, hdc, this, { 50, 50, size.w - 100, size.h - 100 });
+	canvas = new Canvas(hwnd, hdc, this, { 10, 10, size.w - 20, size.h - 20 });
+	font = NIA_LoadFont(L"Open Sans", 20);
 }
 
-void Viewport::shift_scale(int dx)
+void Viewport::shift_scale(double dx)
 {
 	if (dx > 0)
 	{
@@ -29,13 +31,13 @@ void Viewport::shift_scale(int dx)
 	}
 	else
 	{
-		if (this->scale > 0)
+		if (this->scale > -dx)
 			this->scale += dx;
 	}
 	
 }
 
-int Viewport::get_scale()
+double Viewport::get_scale()
 {
 	return scale <= 0 ? 1 : scale;
 }
@@ -50,7 +52,7 @@ void Viewport::mouseButtonDown(Event* e)
 	NIA_GetCursorPositionByEvent(e, &mouse);
 	this->mouse_coord_adjust(&mouse);
 
-	if (canvas->on_hover(mouse))
+	if (canvas->on_hover(mouse) && e->wParam == (MK_CONTROL + MK_LBUTTON))
 	{
 		canvas->mouseButtonDown(e);
 	}
@@ -73,7 +75,7 @@ void Viewport::mouseWheel(Event* e)
 void Viewport::notify(UEvent* ue)
 {
 
-	if (ue->common.recipient == CANVAS)
+	if (ue->common.recipient == R_CANVAS || ue->common.recipient == R_GRAPH)
 	{
 		canvas->notify(ue);
 	}
