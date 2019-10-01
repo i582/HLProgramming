@@ -149,6 +149,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
+		// test in VS github
 		NIA_GetCursorPosition(&e, &mouse);
 		NIA_GetCursorPosition(&e, &mouse_prev);
 
