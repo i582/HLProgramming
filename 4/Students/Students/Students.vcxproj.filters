@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\app">
+      <UniqueIdentifier>{cbced790-55e2-42f0-87c0-32f7a488937f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\NIA">
+      <UniqueIdentifier>{9e29ce41-783f-419a-9e57-c1fff18bd282}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="modules\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\app\app.cpp">
+      <Filter>Исходные файлы\app</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA_listview.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\app\app.h">
+      <Filter>Исходные файлы\app</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_listview.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_point.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_rect.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_circle.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_point2D.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_main.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_line.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

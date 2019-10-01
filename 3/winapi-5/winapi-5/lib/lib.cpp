@@ -84,7 +84,7 @@ void NIA_DrawLine(HDC dst_hdc, Line line_, HexColor color, int thickness)
 	DeleteObject(pen);
 }
 
-void NIA_FillEllipse(HDC dst_hdc, Point point, int radius, HexColor color, HexColor border = 0x000000, int thickness = 0)
+void NIA_FillEllipse(HDC dst_hdc, Point point, int radius, HexColor color, HexColor border, int thickness)
 {
 
 	LOGBRUSH br;

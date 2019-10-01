@@ -144,7 +144,7 @@ LRESULT __stdcall App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
 	case WM_LBUTTONDOWN:
 	{
-		
+		BEGIN_MESSAGE_MAP
 		break;
 	}
 

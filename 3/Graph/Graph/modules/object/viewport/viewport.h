@@ -2,6 +2,7 @@
 
 #include "../object.h"
 #include "../../graph/graph.h"
+#include "../../u_event/user_event.h"
 
 class Viewport : public Object
 {
@@ -40,5 +41,5 @@ private:
 	double delta_by_scale(double scale);
 
 public:
-	//void notify(UEvent* ue);
+	void notify(UEvent* ue);
 };

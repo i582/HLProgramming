@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../NIA/NIA.h"
+#include "../u_event/user_event.h"
 
 class Viewport;
 
@@ -29,6 +30,7 @@ public:
 	size_t on_hover(Point& mouse);
 
 	Point2D normalize(Point2D& point);
+	Point normalize(Point& point);
 
 public: _set
 	void set_point_color(HexColor& color);
@@ -38,6 +40,9 @@ public: _set
 	void set_start_position(Point& start);
 	void restore_start_point();
 	void adjust_by_start(Point2D& p);
+	void adjust_by_start(Point& p);
+	void back_adjust_by_start(Point2D& p);
+	void back_adjust_by_start(Point& p);
 
 	void set_points(vector<Point2D>* points);
 
@@ -56,5 +61,9 @@ public:
 
 public: _event
 	void mouseButtonDown(Event* e);
+
+
+public:
+	void notify(UEvent* ue);
 };
 

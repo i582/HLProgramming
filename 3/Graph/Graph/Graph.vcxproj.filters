@@ -31,6 +31,9 @@
     <Filter Include="Исходные файлы\modules\graph">
       <UniqueIdentifier>{3e5ffd27-df87-4684-8098-a92c15ea3e8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\modules\u_event">
+      <UniqueIdentifier>{e0f14227-8077-43f6-8d24-eec95537abd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\app\app.h">
@@ -47,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="modules\object\viewport\viewport.h">
       <Filter>Исходные файлы\modules\object\viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\u_event\user_event.h">
+      <Filter>Исходные файлы\modules\u_event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="modules\object\viewport\viewport.cpp">
       <Filter>Исходные файлы\modules\object\viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\u_event\user_event.cpp">
+      <Filter>Исходные файлы\modules\u_event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

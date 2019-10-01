@@ -19,26 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="modules\app\app.h" />
-    <ClInclude Include="modules\graph\graph.h" />
-    <ClInclude Include="modules\NIA\NIA.h" />
-    <ClInclude Include="modules\object\object.h" />
-    <ClInclude Include="modules\object\viewport\viewport.h" />
-    <ClInclude Include="modules\u_event\user_event.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="modules\app\app.cpp" />
-    <ClCompile Include="modules\graph\graph.cpp" />
     <ClCompile Include="modules\main.cpp" />
     <ClCompile Include="modules\NIA\NIA.cpp" />
-    <ClCompile Include="modules\object\object.cpp" />
-    <ClCompile Include="modules\object\viewport\viewport.cpp" />
-    <ClCompile Include="modules\u_event\user_event.cpp" />
+    <ClCompile Include="modules\NIA\NIA_listview.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="modules\app\app.h" />
+    <ClInclude Include="modules\NIA\NIA.h" />
+    <ClInclude Include="modules\NIA\NIA_circle.h" />
+    <ClInclude Include="modules\NIA\NIA_line.h" />
+    <ClInclude Include="modules\NIA\NIA_listview.h" />
+    <ClInclude Include="modules\NIA\NIA_main.h" />
+    <ClInclude Include="modules\NIA\NIA_point.h" />
+    <ClInclude Include="modules\NIA\NIA_point2D.h" />
+    <ClInclude Include="modules\NIA\NIA_rect.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B78B49A5-BF12-4E66-A6A6-987DC409280A}</ProjectGuid>
-    <RootNamespace>Graph</RootNamespace>
+    <ProjectGuid>{B20DE592-8D55-4414-A656-5DC1E3331F4F}</ProjectGuid>
+    <RootNamespace>Students</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -96,6 +96,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

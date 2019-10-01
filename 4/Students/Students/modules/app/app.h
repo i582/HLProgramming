@@ -6,8 +6,9 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 
 #include "../NIA/NIA.h"
-#include "../u_event/user_event.h"
-#include "../object/viewport/viewport.h"
+#include "../NIA/NIA_listview.h"
+
+#include "commctrl.h"
 
 using namespace NIA;
 
@@ -23,11 +24,6 @@ enum MenuID
 
 class App
 {
-
-public:
-	static vector <UEvent*> events;
-	static UEvent* push_event(UEvent* ev);
-
 private:
 	static App* instance;
 	App();
@@ -54,12 +50,11 @@ public:
 	HMENU hFileMenu;
 	HMENU hHelpMenu;
 
+	// table
+	HWND hwndList;
+
 	// event part
 	Event e;
-
-	// viewport
-	Viewport* viewport;
-
 
 
 private:
@@ -68,13 +63,11 @@ private:
 
 	void update();
 
-	void handleUserEvent();
-	bool filterUserEvent(UEvent* ue);
+	//void handleUserEvent();
+	//bool filterUserEvent(UEvent* ue);
 
 private:
 	void setup_menu();
-	void open_file();
-	void save_file();
 
 
 _callbacks:
@@ -82,7 +75,7 @@ _callbacks:
 	LRESULT WINAPI WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 private:
-	void notify(UEvent* ue);
+	//void notify(UEvent* ue);
 
 public:
 	int run();

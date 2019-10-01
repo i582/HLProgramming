@@ -82,18 +82,6 @@ void Viewport::mouseWheel(Event* e)
 {
 }
 
-//void Viewport::notify(UEvent* ue)
-//{
-//
-//	if (ue->common.recipient == R_CANVAS || ue->common.recipient == R_GRAPH)
-//	{
-//		canvas->notify(ue);
-//	}
-//
-//}
-
-
-
 void Viewport::draw_left_branch(const double& each, const double& scale_size, const HFONT& hFont)
 {
 	Point start_point = graph->get_start_point();
@@ -259,4 +247,12 @@ double Viewport::delta_by_scale(double scale)
 	}
 
 	return delta;
+}
+
+void Viewport::notify(UEvent* ue)
+{
+	if (ue->common.recipient == R_GRAPH)
+	{
+		graph->notify(ue);
+	}
 }
