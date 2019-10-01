@@ -10,7 +10,7 @@
 #include "NIA_rect.h"
 #include "NIA_circle.h"
 #include "NIA_line.h"
-
+#include "NIA_errors.h"
 
 
 struct Event
@@ -133,3 +133,4 @@ void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count);
 /**/
 
 void NIA_ShowLastError();
+

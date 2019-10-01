@@ -56,6 +56,9 @@ public:
 	// event part
 	Event e;
 
+	//
+	LView* list;
+
 
 private:
 	int init();

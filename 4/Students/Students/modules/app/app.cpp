@@ -55,70 +55,9 @@ int App::init()
 	return true;
 }
 
-BOOL WINAPI AddListViewItems(HWND hWndLV, int colNum, WCHAR** item)
-{
-	int iLastIndex = ListView_GetItemCount(hWndLV);
-
-	LVITEM lvi;
-	lvi.mask = LVIF_TEXT;
-	lvi.cchTextMax = 255;
-	lvi.iItem = iLastIndex;
-	lvi.pszText = item[0];
-	lvi.iSubItem = 0;
-
-	if (ListView_InsertItem(hWndLV, &lvi) == -1)
-		return FALSE;
-	for (int i = 1; i < colNum + 1; i++)
-		ListView_SetItemText(hWndLV, iLastIndex, i, item[i]);
-
-	return TRUE;
-}
-
-int SetListViewColumns(HWND hWndLV, int colNum, WCHAR** header)
-{
-	RECT rcl;
-	GetClientRect(hWndLV, &rcl);
-
-	int index = -1;
-
-	LVCOLUMN lvc;
-	lvc.mask = LVCF_TEXT | LVCF_WIDTH;
-	lvc.cx = (rcl.right - rcl.left) / colNum;
-	lvc.cchTextMax = 255;
-
-	for (int i = 0; i < colNum; i++)
-	{
-		lvc.pszText = header[i];
-		index = ListView_InsertColumn(hWndLV, i, &lvc);
-		if (index == -1) break;
-	}
-
-	return index;
-}
-
-HWND CreateListView(HWND hWndParent, UINT uId)
-{
-	INITCOMMONCONTROLSEX icex;
-	icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
-	icex.dwICC = ICC_LISTVIEW_CLASSES;
-	InitCommonControlsEx(&icex);
-
-	RECT rcl = { 0, 0, 500, 500 };
-
-	HWND hwndList = CreateWindow(WC_LISTVIEW, L"",
-		WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
-		10, 10, 700, 500,
-		hWndParent, (HMENU)12, nullptr, nullptr);
-
-	// Чтобы определялись строка (item) и столбец (subitem) обязательно устанавливаем
-	// расширенный стиль LVS_EX_FULLROWSELECT.
-	ListView_SetExtendedListViewStyleEx(hwndList, 0, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_DOUBLEBUFFER | LVS_EX_HEADERDRAGDROP | LVS_EX_UNDERLINECOLD);
-
-	return (hwndList);
-}
-
 void App::setup()
 {
+
 	setup_menu();
 
 	/*HFONT font = NIA_LoadFont(L"OpenSans", 16);
@@ -157,16 +96,35 @@ void App::setup()
 	AddListViewItems(hwndList, 3, item[2]);*/
 
 
-	NIA::ListView* list;
-	list = new ListView(hwnd, { 100, 100, 1000, 300 }, 1);
+	list = new LView(hwnd, { 100, 100, 1000, 300 }, 1);
 
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"#", 20));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"ФИО", 200))->fixed();
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Математика", 200));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Русский язык", 150));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Английский язык", 150));
+	list->add_in_header(new LVHeaderItem(L"#", 20));
+	list->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list->add_in_header(new LVHeaderItem(L"Математика", 200));
+	list->add_in_header(new LVHeaderItem(L"Русский язык", 150));
+	list->add_in_header(new LVHeaderItem(L"Английский язык", 150));
 
-	list->add_row();
+	list->add_row(new LVRow(list));
+	list->add_row(new LVRow(list));
+	list->add_row(new LVRow(list));
+	list->add_row(new LVRow(list));
+	 
+	list->at(1)->at(0)->set_text(L"Текст");
+	list->at(0)->at(0)->set_text(L"Текст2");
+	list->at(1)->at(0)->set_text(L"Текст3");
+	list->at(2)->at(0)->set_text(L"Текст4");
+	list->at(3)->at(0)->set_text(L"Текст5");
+
+	list->at(0)->at(1)->set_text(L"Текст2");
+	list->at(1)->at(1)->set_text(L"Текст3");
+	list->at(2)->at(1)->set_text(L"Текст4");
+	list->at(3)->at(1)->set_text(L"Текст5");
+
+	list->at(0)->at(2)->set_text(L"Текст2");
+	list->at(1)->at(2)->set_text(L"Текст3");
+	list->at(2)->at(2)->set_text(L"Текст4");
+	list->at(3)->at(2)->set_text(L"Текст5");
+	
 
 	/*list->add_collumn(L"#", 20);
 	list->add_collumn(L"ФИО", 200, ListViewAlign::CENTERED);
@@ -216,15 +174,40 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	e = { hwnd, uMsg, wParam, lParam };
 
-
 	switch (uMsg)
 	{
 
+	case WM_NOTIFY:
+	{
+		
+		LPNMHDR lpnmh = (LPNMHDR)lParam;
+
+		if (lpnmh->code == LVN_COLUMNCLICK)
+		{
+			NMLISTVIEW* pListView = (NMLISTVIEW*)lParam;
+			HWND list_hwnd = list->get_hwnd();
+			ListView_SortItems(list_hwnd, LView::comp_func, (LPARAM)pListView->iSubItem);
+			NIA_ShowErrorDescriptionByErrorId(GetLastError());
+
+			WCHAR wchar_inp[255];
+			wstring w_text;
+			w_text.resize(50);
+
+			ListView_GetItemText(hwnd, 1, 2, &w_text[0], 255);
+			NIA_ShowErrorDescriptionByErrorId(GetLastError());
+
+			return 0;
+			//MessageBox(NULL, L"text", L"Предупреждение", MB_ICONINFORMATION);
+		}
+
+		return 0;
+	}
 
 
 
 	case WM_PAINT:
 	{
+
 		HDC hdc_temp = BeginPaint(hwnd, &ps);
 		
 		EndPaint(hwnd, &ps);
@@ -346,7 +329,7 @@ void App::setup_menu()
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_DELETE, L"&Включить удаление");
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_ADD, L"&Включить добавление");
 
-
+	NIA_ShowLastError();
 	SetMenu(hwnd, hMenu);
 	UpdateWindow(hwnd);
 }

@@ -30,8 +30,20 @@
     <ClCompile Include="modules\NIA\NIA.cpp">
       <Filter>Исходные файлы\NIA</Filter>
     </ClCompile>
+    <ClCompile Include="modules\NIA\NIA_listview__header_item.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
     <ClCompile Include="modules\NIA\NIA_listview.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA_listview__row.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA_errors.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\NIA\NIA_listview__row_item.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,5 +74,20 @@
     <ClInclude Include="modules\NIA\NIA_line.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_listview__header_item.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_listview__row.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_listview__row_item.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\NIA\NIA_errors.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

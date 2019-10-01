@@ -3,101 +3,53 @@
 
 #include "NIA_main.h"
 #include "NIA_rect.h"
-
-
-namespace NIA
-{
+#include "NIA_listview__header_item.h"
+#include "NIA_listview__row.h"
 
 constexpr int AUTO = -1;
 
 
 
-enum ListViewCollumnAlign
+using LVHeader = vector <LVHeaderItem*>;
+using LVRows = vector <LVRow*>;
+
+class LView
 {
-	LEFT = LVCFMT_LEFT,
-	CENTERED = LVCFMT_CENTER,
-	RIGHT = LVCFMT_RIGHT
-};
-
-class ListView;
-
-class ListViewHeaderCollumn
-{
-private:
-	int id;
-	int width;
-	bool is_fixed;
-
-	ListView* list_view;
-		
-		
-	wstring title;
-	ListViewCollumnAlign align;
-		
-		
 public:
-	ListViewHeaderCollumn(ListView* list_view, wstring title, int width);
+	static int _stdcall comp_func(LPARAM lp1, LPARAM lp2, LPARAM sortParam);
 
-public:
-	friend ListView;
-
-private:
-	bool init();
-	void set_id(int id);
-
-public:
-	ListViewHeaderCollumn* fixed();
-	ListViewHeaderCollumn* unfixed();
-
-};
-
-
-class ListView
-{
 private:
 	Rect size;
 	HWND parent;
-	HWND hwndList;
+	HWND hwnd;
+	LVHeader header;
+	LVRows rows;
+
+
 	int id;
 
-
-	vector <ListViewHeaderCollumn*> collumns;
-
+	
+public:
+	LView(HWND parent, Rect size, int id);
 
 public:
-	ListView(HWND parent, Rect size, int id);
-
-public:
-	friend ListViewHeaderCollumn;
+	friend LVHeaderItem;
 
 private:
 	void init();
 
+_get
 public:
-	void set_collumn_title(int col_id, wstring title);
-
-public: _get
-	HWND const get_hwnd();
+	HWND get_hwnd();
 
 public:
-	ListViewHeaderCollumn* add_header_collumn(ListViewHeaderCollumn* col);
-		
-	void add_row();
+	LVRow* at(unsigned int index);
+	LVRow* operator[](unsigned int index);
+
+public:
+	LVHeaderItem* add_in_header(LVHeaderItem* item);
+	
+	LVRow* add_row(LVRow* row);
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

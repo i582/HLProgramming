@@ -1,56 +1,78 @@
 #include "NIA_listview.h"
 
-NIA::ListView::ListView(HWND parent, Rect size, int id)
+int _stdcall LView::comp_func(LPARAM lp1, LPARAM lp2, LPARAM sortParam)
+{
+	WCHAR* text = (WCHAR*)lp1;
+	//MessageBox(NULL, text, L"Предупреждение", MB_ICONINFORMATION);
+
+	return 0;
+}
+
+LView::LView(HWND parent, Rect size, int id)
 {
 	this->parent = parent;
-	this->hwndList = nullptr;
+	this->hwnd = nullptr;
 	this->size = size;
 	this->id = id;
 
 	this->init();
 }
 
-void NIA::ListView::init()
+void LView::init()
 {
 	INITCOMMONCONTROLSEX icex;
 	icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
 	icex.dwICC = ICC_LISTVIEW_CLASSES;
 	InitCommonControlsEx(&icex);
 
-	hwndList = CreateWindow(WC_LISTVIEW, L"",
-		WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
+	hwnd = CreateWindow(WC_LISTVIEW, L"",
+		WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS | LVS_SORTDESCENDING,
 		size.x, size.y, size.w, size.h,
 		parent, (HMENU)id, nullptr, nullptr);
 
-	ListView_SetExtendedListViewStyleEx(hwndList, 0, 
+
+	/*ListView_SetExtendedListViewStyleEx(hwnd, 0,
 		LVS_EX_FULLROWSELECT |
 		LVS_EX_GRIDLINES |
 		LVS_EX_DOUBLEBUFFER |
 		LVS_EX_HEADERDRAGDROP |
-		LVS_EX_UNDERLINECOLD);
+		LVS_EX_UNDERLINECOLD);*/
+
+	NIA_ShowErrorDescriptionByErrorId(GetLastError());
 }
 
-_get HWND const NIA::ListView::get_hwnd()
+HWND LView::get_hwnd()
 {
-	return hwndList;
+	return hwnd;
 }
 
-NIA::ListViewHeaderCollumn* NIA::ListView::add_header_collumn(ListViewHeaderCollumn* col)
+LVRow* LView::at(unsigned int index)
 {
-	col->set_id(collumns.size());
+	return index < rows.size() ? rows.at(index) : nullptr;
+}
 
-	if (col->init())
+LVRow* LView::operator[](unsigned int index)
+{
+	return at(index);
+}
+
+LVHeaderItem* LView::add_in_header(LVHeaderItem* item)
+{
+	item->parent = this;
+	item->hwnd = hwnd;
+	item->id = header.size();
+
+	if (item->init())
 	{
-		collumns.push_back(col);
+		header.push_back(item);
 	}
 
-	return col;
+	return item;
 }
 
-void NIA::ListView::add_row()
+LVRow* LView::add_row(LVRow* row)
 {
-
-	int iLastIndex = ListView_GetItemCount(hwndList);
+	int iLastIndex = ListView_GetItemCount(hwnd);
 
 	LVITEM lvi;
 	lvi.mask = LVIF_TEXT;
@@ -59,80 +81,21 @@ void NIA::ListView::add_row()
 	lvi.pszText = NULL;
 	lvi.iSubItem = 0;
 
-	ListView_InsertItem(hwndList, &lvi);
-		
+	ListView_InsertItem(hwnd, &lvi);
 
-}
+	
 
-void NIA::ListView::set_collumn_title(int col_id, wstring title)
-{
-}
+	row->id = iLastIndex;
+	row->max_count = header.size();
 
-NIA::ListViewHeaderCollumn::ListViewHeaderCollumn(ListView* list_view, wstring title, int width)
-{
-	this->list_view = list_view;
-	this->id = 0;
-	this->title = title;
-	this->width = width;
-	this->align = ListViewCollumnAlign::LEFT;
-	this->is_fixed = false;
-
-}
-
-bool NIA::ListViewHeaderCollumn::init()
-{
-
-	int index = -1;
-	wstring* d_title = new wstring;
-	*d_title = this->title;
-
-	LVCOLUMN lvc;
-	lvc.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_FMT;
-	lvc.fmt = this->align;
-	lvc.cx = this->width;
-	lvc.cchTextMax = 255;
-	lvc.pszText = (WCHAR*)d_title->c_str();
-
-	if (this->is_fixed)
+	for (size_t i = 0; i < header.size(); i++)
 	{
-		lvc.fmt |= LVCFMT_FIXED_WIDTH;
+		row->add(new LVItem(row, L""));
 	}
 
-	index = ListView_InsertColumn(list_view->get_hwnd(), id, &lvc);
 
-	if (index == -1)
-	{
-		return false;
-	}
+	rows.push_back(row);
 
-	return true;
+	return row;
 }
 
-void NIA::ListViewHeaderCollumn::set_id(int id)
-{
-	this->id = id;
-}
-
-NIA::ListViewHeaderCollumn* NIA::ListViewHeaderCollumn::fixed()
-{
-	is_fixed = true;
-
-	HWND hw = list_view->get_hwnd();
-
-	LVCOLUMN* lvc = new LVCOLUMN;
-	ListView_GetColumn(hw, id, lvc);
-
-	/*lvc->fmt |= LVCFMT_FIXED_WIDTH;
-
-	LVCOLUMN lvca = *lvc;*/
-
-	//ListView_SetColumn(hw, 0, lvc);
-
-	return this;
-}
-
-NIA::ListViewHeaderCollumn* NIA::ListViewHeaderCollumn::unfixed()
-{
-	is_fixed = false;
-	return this;
-}

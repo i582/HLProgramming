@@ -36,3 +36,12 @@ typedef COLORREF HexColor;
 #define _interface struct
 #define _callback static
 #define _callbacks public
+
+
+
+enum LVAlign
+{
+	LEFT = LVCFMT_LEFT,
+	CENTERED = LVCFMT_CENTER,
+	RIGHT = LVCFMT_RIGHT
+};

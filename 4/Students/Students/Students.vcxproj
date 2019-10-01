@@ -22,18 +22,29 @@
     <ClCompile Include="modules\app\app.cpp" />
     <ClCompile Include="modules\main.cpp" />
     <ClCompile Include="modules\NIA\NIA.cpp" />
+    <ClCompile Include="modules\NIA\NIA_errors.cpp" />
     <ClCompile Include="modules\NIA\NIA_listview.cpp" />
+    <ClCompile Include="modules\NIA\NIA_listview__header_item.cpp" />
+    <ClCompile Include="modules\NIA\NIA_listview__row.cpp" />
+    <ClCompile Include="modules\NIA\NIA_listview__row_item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\app\app.h" />
     <ClInclude Include="modules\NIA\NIA.h" />
     <ClInclude Include="modules\NIA\NIA_circle.h" />
+    <ClInclude Include="modules\NIA\NIA_errors.h" />
     <ClInclude Include="modules\NIA\NIA_line.h" />
     <ClInclude Include="modules\NIA\NIA_listview.h" />
+    <ClInclude Include="modules\NIA\NIA_listview__header_item.h" />
+    <ClInclude Include="modules\NIA\NIA_listview__row.h" />
+    <ClInclude Include="modules\NIA\NIA_listview__row_item.h" />
     <ClInclude Include="modules\NIA\NIA_main.h" />
     <ClInclude Include="modules\NIA\NIA_point.h" />
     <ClInclude Include="modules\NIA\NIA_point2D.h" />
     <ClInclude Include="modules\NIA\NIA_rect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
