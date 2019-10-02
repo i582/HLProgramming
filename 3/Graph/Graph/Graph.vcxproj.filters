@@ -39,9 +39,6 @@
     <ClInclude Include="modules\app\app.h">
       <Filter>Исходные файлы\modules\app</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA.h">
-      <Filter>Исходные файлы\modules\NIA</Filter>
-    </ClInclude>
     <ClInclude Include="modules\object\object.h">
       <Filter>Исходные файлы\modules\object</Filter>
     </ClInclude>
@@ -59,9 +56,6 @@
     <ClCompile Include="modules\main.cpp">
       <Filter>Исходные файлы\modules</Filter>
     </ClCompile>
-    <ClCompile Include="modules\NIA\NIA.cpp">
-      <Filter>Исходные файлы\modules\NIA</Filter>
-    </ClCompile>
     <ClCompile Include="modules\app\app.cpp">
       <Filter>Исходные файлы\modules\app</Filter>
     </ClCompile>
@@ -76,6 +70,24 @@
     </ClCompile>
     <ClCompile Include="modules\u_event\user_event.cpp">
       <Filter>Исходные файлы\modules\u_event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

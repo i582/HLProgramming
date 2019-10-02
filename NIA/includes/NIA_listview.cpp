@@ -1,3 +1,6 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "NIA_listview.h"
 
 int _stdcall LView::comp_func(LPARAM lp1, LPARAM lp2, LPARAM sortParam)
@@ -31,14 +34,16 @@ void LView::init()
 		parent, (HMENU)id, nullptr, nullptr);
 
 
-	/*ListView_SetExtendedListViewStyleEx(hwnd, 0,
+	ListView_SetExtendedListViewStyleEx(hwnd, 0,
 		LVS_EX_FULLROWSELECT |
 		LVS_EX_GRIDLINES |
 		LVS_EX_DOUBLEBUFFER |
 		LVS_EX_HEADERDRAGDROP |
-		LVS_EX_UNDERLINECOLD);*/
+		LVS_EX_UNDERLINECOLD);
 
-	NIA_ShowErrorDescriptionByErrorId(GetLastError());
+
+	
+	//NIA_ShowErrorDescriptionByErrorId(GetLastError());
 }
 
 HWND LView::get_hwnd()
@@ -72,6 +77,8 @@ LVHeaderItem* LView::add_in_header(LVHeaderItem* item)
 
 LVRow* LView::add_row(LVRow* row)
 {
+	
+
 	int iLastIndex = ListView_GetItemCount(hwnd);
 
 	LVITEM lvi;
@@ -80,6 +87,8 @@ LVRow* LView::add_row(LVRow* row)
 	lvi.iItem = iLastIndex;
 	lvi.pszText = NULL;
 	lvi.iSubItem = 0;
+	lvi.iImage = 0;
+	lvi.iIndent = 0;
 
 	ListView_InsertItem(hwnd, &lvi);
 
@@ -97,5 +106,75 @@ LVRow* LView::add_row(LVRow* row)
 	rows.push_back(row);
 
 	return row;
+}
+
+LRESULT __stdcall LView::proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+
+	LView* lview;
+
+	if (msg == WM_CREATE)
+	{
+		lview = (LView*)((CREATESTRUCT*)lParam)->lpCreateParams;
+		SetLastError(0);
+		if (!SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)lview))
+		{
+			if (GetLastError() != 0)
+				return 0;
+		}
+	}
+	else
+	{
+		lview = (LView*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+	}
+
+	if (lview != nullptr)
+	{
+
+
+
+
+
+
+		lview->hwnd = hwnd;
+		
+
+		switch (msg)
+		{
+		case WM_NOTIFY:
+		{
+			LPNMHDR lpnmh = (LPNMHDR)lParam;
+
+			if (lpnmh->code == LVN_COLUMNCLICK)
+			{
+				
+				MessageBox(NULL, L"text", L"Предупреждение", MB_ICONINFORMATION);
+
+				return 0;
+			}
+
+			return 0;
+		}
+		
+		
+		}
+
+
+		return CallWindowProc(lview->oldProc, hwnd, msg, wParam, lParam);
+
+
+
+	}
+
+	return DefWindowProc(hwnd, msg, wParam, lParam);
+
+
+
+	
+}
+
+void LView::set_callback(WNDPROC new_proc)
+{
+	oldProc = (WNDPROC)SetWindowLong(hwnd, GWL_WNDPROC, (LONG)new_proc);
 }
 

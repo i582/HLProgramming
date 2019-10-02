@@ -1,3 +1,6 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "NIA.h"
 
 void NIA_GetCursorPosition(HDC hdc, Point* p)
@@ -28,6 +31,11 @@ Point NIA_GetCursorPosition(Event* e)
 	Point p;
 	NIA_GetCursorPosition(e, &p);
 	return p;
+}
+
+HINSTANCE NIA::GetInstanceFromHwnd(HWND hwnd)
+{
+	return (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
 }
 
 void NIA_SetCurrentBitmap(HDC hdc, HBITMAP bitmap)
@@ -65,7 +73,7 @@ void NIA_FillRect(HDC hdc, Rect rect, HexColor color, HexColor border_color, int
 	DeleteObject(pen);
 }
 
-void NIA_DrawLine(HDC hdc, Line line, HexColor color, int thickness)
+void NIA_DrawLine(HDC hdc, const Line& line, HexColor color, int thickness)
 {
 	HPEN pen = CreatePen(PS_SOLID, thickness, color);
 	SelectPen(hdc, pen);
@@ -76,7 +84,7 @@ void NIA_DrawLine(HDC hdc, Line line, HexColor color, int thickness)
 	DeleteObject(pen);
 }
 
-void NIA_FillEllipse(HDC hdc, Point point, int radius, HexColor color, HexColor border_color, int thickness)
+void NIA_FillEllipse(HDC hdc, const Point& point, int radius, HexColor color, HexColor border_color, int thickness)
 {
 	HBRUSH brush;
 	HPEN pen;
@@ -91,7 +99,13 @@ void NIA_FillEllipse(HDC hdc, Point point, int radius, HexColor color, HexColor 
 	DeleteObject(pen);
 }
 
-HFONT NIA_LoadFont(wstring name, int size)
+HBITMAP NIA::LoadBitmapImage(HWND hwnd, const wstring& path, int width, int height)
+{
+	HINSTANCE hInst = NIA::GetInstanceFromHwnd(hwnd);
+	return (HBITMAP)LoadImage(hInst, path.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+}
+
+HFONT NIA_LoadFont(const wstring& name, int size)
 {
 	return CreateFont(size, NULL, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, name.c_str());
 }
@@ -101,7 +115,7 @@ void NIA_CloseFont(HFONT font)
 	DeleteObject((HGDIOBJ)font);
 }
 
-void NIA_RenderText(HDC dst_hdc, HFONT font, wstring text, Rect size)
+void NIA_RenderText(HDC dst_hdc, HFONT font, const wstring& text, const Rect& size)
 {
 	SelectFont(dst_hdc, font);
 	ExtTextOut(dst_hdc, size.x, size.y, ETO_CLIPPED, NULL, text.c_str(), text.length(), NULL);
@@ -110,6 +124,8 @@ void NIA_RenderText(HDC dst_hdc, HFONT font, wstring text, Rect size)
 wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter)
 {
 	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
+	if (of == nullptr)
+		return L"";
 
 	WCHAR path[255] = L"\0";
 
@@ -148,6 +164,8 @@ wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter)
 wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter)
 {
 	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
+	if (of == nullptr)
+		return L"";
 
 	WCHAR path[255] = L"\0";
 
@@ -180,7 +198,7 @@ wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter)
 	return path_string;
 }
 
-HANDLE NIA_OpenFile(wstring path, DWORD dwAccess, DWORD dwShareMode)
+HANDLE NIA_OpenFile(const wstring& path, DWORD dwAccess, DWORD dwShareMode)
 {
 	return CreateFile(path.c_str(), dwAccess, dwShareMode, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 }
@@ -620,7 +638,6 @@ vector<string>* NIA::split(string str, char symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
-			temp = "";
 		}
 		else
 		{
@@ -628,7 +645,7 @@ vector<string>* NIA::split(string str, char symbol)
 		}
 	}
 
-	if (temp != "")
+	if (!temp.empty())
 		result->push_back(temp);
 
 	return result;
@@ -665,7 +682,6 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 		{
 			result->push_back(temp);
 			temp.clear();
-			temp = "";
 			is_sep = false;
 		}
 		else
@@ -675,7 +691,7 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 
 	}
 
-	if (temp != "")
+	if (!temp.empty())
 		result->push_back(temp);
 
 	return result;
@@ -694,7 +710,6 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
-			temp = L"";
 		}
 		else
 		{
@@ -702,7 +717,7 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		}
 	}
 
-	if (temp != L"")
+	if (!temp.empty())
 		result->push_back(temp);
 
 	return result;
@@ -737,7 +752,6 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 		{
 			result->push_back(temp);
 			temp.clear();
-			temp = L"";
 			is_sep = false;
 		}
 		else
@@ -747,7 +761,7 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 
 	}
 
-	if (temp != L"")
+	if (!temp.empty())
 		result->push_back(temp);
 
 	return result;

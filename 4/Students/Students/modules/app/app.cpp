@@ -1,3 +1,6 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "app.h"
 
 App* App::instance = nullptr;
@@ -96,7 +99,27 @@ void App::setup()
 	AddListViewItems(hwndList, 3, item[2]);*/
 
 
-	list = new LView(hwnd, { 100, 100, 1000, 300 }, 1);
+	list = new LView(hwnd, { 10, 10, 1400, 600 }, 1);
+
+
+
+	HBITMAP bitmap = NIA::LoadBitmapImage(hwnd, L"modules\\app\\3.bmp", 200, 200);
+
+	HIMAGELIST images = ImageList_Create(
+		200, 200,
+		ILC_COLOR32, 9, 1);
+
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+
+
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_SMALL);
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_NORMAL);
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_STATE);
+
+
 
 	list->add_in_header(new LVHeaderItem(L"#", 20));
 	list->add_in_header(new LVHeaderItem(L"ФИО", 200));
@@ -125,6 +148,12 @@ void App::setup()
 	list->at(2)->at(2)->set_text(L"Текст4");
 	list->at(3)->at(2)->set_text(L"Текст5");
 	
+
+
+
+	//HBITMAP bitmap = LoadBitmap(hInst, L"1.bmp");
+
+	NIA_ShowErrorDescriptionByErrorId(GetLastError());
 
 	/*list->add_collumn(L"#", 20);
 	list->add_collumn(L"ФИО", 200, ListViewAlign::CENTERED);
@@ -177,6 +206,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 
+	
 	case WM_NOTIFY:
 	{
 		
@@ -187,14 +217,14 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NMLISTVIEW* pListView = (NMLISTVIEW*)lParam;
 			HWND list_hwnd = list->get_hwnd();
 			ListView_SortItems(list_hwnd, LView::comp_func, (LPARAM)pListView->iSubItem);
-			NIA_ShowErrorDescriptionByErrorId(GetLastError());
+			//NIA_ShowErrorDescriptionByErrorId(GetLastError());
 
 			WCHAR wchar_inp[255];
 			wstring w_text;
 			w_text.resize(50);
 
 			ListView_GetItemText(hwnd, 1, 2, &w_text[0], 255);
-			NIA_ShowErrorDescriptionByErrorId(GetLastError());
+			//NIA_ShowErrorDescriptionByErrorId(GetLastError());
 
 			return 0;
 			//MessageBox(NULL, L"text", L"Предупреждение", MB_ICONINFORMATION);
@@ -329,7 +359,7 @@ void App::setup_menu()
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_DELETE, L"&Включить удаление");
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_ADD, L"&Включить добавление");
 
-	NIA_ShowLastError();
+	
 	SetMenu(hwnd, hMenu);
 	UpdateWindow(hwnd);
 }

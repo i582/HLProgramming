@@ -50,6 +50,19 @@ public:
 	LVHeaderItem* add_in_header(LVHeaderItem* item);
 	
 	LVRow* add_row(LVRow* row);
+
+
+public:
+	WNDPROC oldProc;
+
+_callbacks:
+	_callback LRESULT __stdcall proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+
+public:
+	void set_callback(WNDPROC new_proc);
+
+
 };
 
 

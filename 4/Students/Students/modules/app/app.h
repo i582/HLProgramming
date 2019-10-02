@@ -5,8 +5,8 @@ name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 
-#include "../NIA/NIA.h"
-#include "../NIA/NIA_listview.h"
+#include "NIA.h"
+#include "NIA_listview.h"
 
 #include "commctrl.h"
 

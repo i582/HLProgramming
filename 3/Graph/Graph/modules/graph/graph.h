@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../NIA/NIA.h"
+#include "NIA.h"
 #include "../u_event/user_event.h"
 
 class Viewport;
