@@ -149,9 +149,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
-		// test in VS github
-		NIA_GetCursorPosition(&e, &mouse);
-		NIA_GetCursorPosition(&e, &mouse_prev);
+		mouse = NIA::Mouse::position(&e);
 
 		if (viewport->on_hover(mouse))
 		{
@@ -174,22 +172,30 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (wParam == (MK_LBUTTON))
 		{
-			NIA_GetCursorPosition(&e, &mouse);
-
+			/*NIA_GetCursorPosition(&e, &mouse);
 			Point delta = mouse - mouse_prev;
-			
+			NIA_GetCursorPosition(&e, &mouse_prev);*/
+
+			/*mouse = NIA::Mouse::GetPosition(&e);
+			Point delta = mouse - mouse_prev;
+			mouse_prev = NIA::Mouse::GetPosition(&e);*/
+
+			Point delta = NIA::Mouse::delta(hdc);
+
+			//Point delta = NIA::GetMouseDelta(&e, &mouse, &mouse_prev);
+
 
 			viewport->get_graph()->shift_start_position(delta);
 			viewport->render();
 
-			NIA_GetCursorPosition(&e, &mouse_prev);
+			
 		}
 		break;
 	}
 
 	case WM_MOUSEWHEEL:
 	{
-		NIA_GetCursorPosition(hdc, &mouse);
+		mouse = NIA::Mouse::position(hdc);
 		viewport->adjust(mouse);
 
 		Point before = viewport->get_graph()->normalize(mouse);

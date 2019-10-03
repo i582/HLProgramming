@@ -21,6 +21,8 @@ struct Point2D
 	Point2D operator/(const int x) { return Point2D(this->x / x, this->y / x); }
 	Point2D operator/(const double x) { return Point2D(this->x / x, this->y / x); }
 
+	bool operator==(const Point2D point) { return (this->x == point.x) && (this->y == point.y); }
+
 	bool in(Rect& r) { return PtInRect(&r.to_rect(), { (int)x, (int)y }); };
 	bool in(Rect* r) { return PtInRect(&r->to_rect(), { (int)x, (int)y }); };
 	bool in(const Circle& c) { return (long)((x - (int)c.x) * (x - (int)c.x) + (y - (int)c.y) * (y - (int)c.y)) <= (long)(c.r * c.r); };

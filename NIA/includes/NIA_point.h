@@ -19,6 +19,8 @@ struct Point
 	Point operator/(const int x) { return Point((int)(this->x / x), (int)(this->y / x)); }
 	Point operator/(const double x) { return Point((int)(this->x / x), (int)(this->y / x)); }
 
+	bool operator==(const Point point) { return (this->x == point.x) && (this->y == point.y); }
+
 	POINT to_point() { POINT p; p.x = x, p.y = y; return p; }
 
 	bool in(Rect& r) { return PtInRect(&r.to_rect(), { x, y }); };

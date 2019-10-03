@@ -9,6 +9,8 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #include "../u_event/user_event.h"
 #include "../object/viewport/viewport.h"
 
+
+
 using namespace NIA;
 
 enum MenuID

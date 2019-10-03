@@ -51,6 +51,18 @@
     <ClInclude Include="modules\u_event\user_event.h">
       <Filter>Исходные файлы\modules\u_event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_mouse.h">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_event.h">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_draw.h">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_font.h">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="modules\main.cpp">
@@ -88,6 +100,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp">
       <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

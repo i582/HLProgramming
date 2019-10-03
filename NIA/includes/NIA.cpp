@@ -3,35 +3,6 @@
 
 #include "NIA.h"
 
-void NIA_GetCursorPosition(HDC hdc, Point* p)
-{
-	POINT point;
-	HWND hwnd = WindowFromDC(hdc);
-	GetCursorPos(&point);
-	ScreenToClient(hwnd, &point);
-	p->x = point.x;
-	p->y = point.y;
-}
-
-void NIA_GetCursorPosition(Event* e, Point* p)
-{
-	p->x = LOWORD(e->lParam);
-	p->y = HIWORD(e->lParam);
-}
-
-Point NIA_GetCursorPosition(HDC hdc)
-{
-	Point p;
-	NIA_GetCursorPosition(hdc, &p);
-	return p;
-}
-
-Point NIA_GetCursorPosition(Event* e)
-{
-	Point p;
-	NIA_GetCursorPosition(e, &p);
-	return p;
-}
 
 HINSTANCE NIA::GetInstanceFromHwnd(HWND hwnd)
 {
@@ -103,16 +74,6 @@ HBITMAP NIA::LoadBitmapImage(HWND hwnd, const wstring& path, int width, int heig
 {
 	HINSTANCE hInst = NIA::GetInstanceFromHwnd(hwnd);
 	return (HBITMAP)LoadImage(hInst, path.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
-}
-
-HFONT NIA_LoadFont(const wstring& name, int size)
-{
-	return CreateFont(size, NULL, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, name.c_str());
-}
-
-void NIA_CloseFont(HFONT font)
-{
-	DeleteObject((HGDIOBJ)font);
 }
 
 void NIA_RenderText(HDC dst_hdc, HFONT font, const wstring& text, const Rect& size)

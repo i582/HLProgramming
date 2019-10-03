@@ -7,10 +7,15 @@ Viewport::Viewport(HWND hwnd, HDC parent_hdc, Rect size)
 	this->setup();
 }
 
+Viewport::~Viewport()
+{
+	NIA::Font::close(font);
+}
+
 
 void Viewport::render()
 {
-	NIA_FillRect(hdc, { 0, 0, size.w, size.h }, 0x282828);
+	NIA::Draw::fillRect(hdc, { 0, 0, size.w, size.h }, 0x282828);
 
 	SetTextColor(hdc, 0xffffff);
 	SetBkColor(hdc, 0x282828);
@@ -22,11 +27,10 @@ void Viewport::render()
 	draw_top_branch(each, scale, font);
 	draw_bottom_branch(each, scale, font);
 
-
 	Point start_point = graph->get_start_point();
-	NIA_DrawLine(hdc, { start_point.x, 0, start_point.x, size.h }, 0xffffff);
-	NIA_DrawLine(hdc, { 0, start_point.y, size.w, start_point.y }, 0xffffff);
-
+	NIA::Draw::drawLine(hdc, { start_point.x, 0, start_point.x, size.h }, 0xffffff);
+	NIA::Draw::drawLine(hdc, { 0, start_point.y, size.w, start_point.y }, 0xffffff);
+	
 
 	graph->render();
 	
@@ -36,7 +40,7 @@ void Viewport::render()
 
 void Viewport::setup()
 {
-	font = NIA_LoadFont(L"Open Sans", 20);
+	font = NIA::Font::open(L"Open Sans", 20);
 	graph = new Graph(this);
 }
 
@@ -60,7 +64,7 @@ Graph* const Viewport::get_graph()
 
 void Viewport::mouseButtonDown(Event* e)
 {
-	NIA_GetCursorPosition(e, &mouse);
+	mouse = NIA::Mouse::position(e);
 	this->adjust(mouse);
 	
 	if (e->wParam == (MK_CONTROL + MK_LBUTTON))
@@ -88,11 +92,11 @@ void Viewport::draw_left_branch(const double& each, const double& scale_size, co
 	double start = -each;
 	for (int x = start_point.x - scale_size * each; x >= 0; x -= scale_size * each, start -= each)
 	{
-		NIA_DrawLine(hdc, { x, (int)start_point.y - 4, x, (int)start_point.y + 5 }, 0xffffff);
+		NIA::Draw::drawLine(hdc, { x, (int)start_point.y - 4, x, (int)start_point.y + 5 }, 0xffffff);
 
-		NIA_DrawLine(hdc, { x, 0, x, size.h }, 0x595959);
+		NIA::Draw::drawLine(hdc, { x, 0, x, size.h }, 0x595959);
 
-		NIA_RenderText(hdc, hFont, NIA::to_wstring(start, 1), { x - 6, (int)start_point.y + 5, 0, 0 });
+		NIA::Draw::text(hdc, hFont, NIA::to_wstring(start, 1), { x - 6, (int)start_point.y + 5, 0, 0 });
 	}
 }
 
@@ -102,11 +106,11 @@ void Viewport::draw_right_branch(const double& each, const double& scale_size, c
 	double start = each;
 	for (int x = start_point.x + scale_size * each; x < size.w; x += scale_size * each, start += each)
 	{
-		NIA_DrawLine(hdc, { x, (int)start_point.y - 4, x, (int)start_point.y + 5 }, 0xffffff);
+		NIA::Draw::drawLine(hdc, { x, (int)start_point.y - 4, x, (int)start_point.y + 5 }, 0xffffff);
 
-		NIA_DrawLine(hdc, { x, 0, x, size.h }, 0x595959);
+		NIA::Draw::drawLine(hdc, { x, 0, x, size.h }, 0x595959);
 
-		NIA_RenderText(hdc, hFont, NIA::to_wstring(start, 1), { x - 6, (int)start_point.y + 5, 0, 0 });
+		NIA::Draw::text(hdc, hFont, NIA::to_wstring(start, 1), { x - 6, (int)start_point.y + 5, 0, 0 });
 	}
 }
 
@@ -117,11 +121,11 @@ void Viewport::draw_bottom_branch(const double& each, const double& scale_size, 
 	double start = -each;
 	for (int y = start_point.y + scale_size * each; y < size.h; y += scale_size * each, start -= each)
 	{
-		NIA_DrawLine(hdc, { (int)start_point.x - 4, y, (int)start_point.x + 5, y }, 0xffffff);
+		NIA::Draw::drawLine(hdc, { (int)start_point.x - 4, y, (int)start_point.x + 5, y }, 0xffffff);
 
-		NIA_DrawLine(hdc, { 0, y, size.w, y }, 0x595959);
+		NIA::Draw::drawLine(hdc, { 0, y, size.w, y }, 0x595959);
 
-		NIA_RenderText(hdc, hFont, NIA::to_wstring(start, 1), { (int)start_point.x + 10, y - 11, 0, 0 });
+		NIA::Draw::text(hdc, hFont, NIA::to_wstring(start, 1), { (int)start_point.x + 10, y - 11, 0, 0 });
 	}
 }
 
@@ -131,11 +135,11 @@ void Viewport::draw_top_branch(const double& each, const double& scale_size, con
 	double start = each;
 	for (int y = start_point.y - scale_size * each; y >= 0; y -= scale_size * each, start += each)
 	{
-		NIA_DrawLine(hdc, { (int)start_point.x - 4, y, (int)start_point.x + 5, y }, 0xffffff);
+		NIA::Draw::drawLine(hdc, { (int)start_point.x - 4, y, (int)start_point.x + 5, y }, 0xffffff);
 
-		NIA_DrawLine(hdc, { 0, y, size.w, y }, 0x595959);
+		NIA::Draw::drawLine(hdc, { 0, y, size.w, y }, 0x595959);
 
-		NIA_RenderText(hdc, hFont, NIA::to_wstring(start, 1), { (int)start_point.x + 10, y - 11, 0, 0 });
+		NIA::Draw::text(hdc, hFont, NIA::to_wstring(start, 1), { (int)start_point.x + 10, y - 11, 0, 0 });
 	}
 }
 

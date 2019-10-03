@@ -135,7 +135,7 @@ void Graph::add_point(Point p)
 
 void Graph::mouseButtonDown(Event* e)
 {
-	NIA_GetCursorPosition(e, &mouse);
+	mouse = NIA::Mouse::position(e);
 	parent->adjust(mouse);
 
 	double scale = parent->get_scale();
@@ -189,6 +189,7 @@ void Graph::render()
 	for (auto& point : points)
 	{
 		Point2D scale_point = normalize(point);
-		NIA_FillEllipse(parent->get_hdc(), scale_point.to_point(), point_size, point_color);
+		NIA::Draw::fillEllipse(parent->get_hdc(), scale_point.to_point(), point_size, point_color);
 	}
 }
+

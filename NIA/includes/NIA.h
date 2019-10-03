@@ -1,25 +1,21 @@
 /**
- *  Version 0.0.3
+ *  Version 0.0.4
  */
 
 #pragma once
 
 #include "NIA_main.h"
+#include "NIA_event.h"
+#include "NIA_mouse.h"
+#include "NIA_draw.h"
+#include "NIA_font.h"
 #include "NIA_point.h"
 #include "NIA_point2D.h"
 #include "NIA_rect.h"
 #include "NIA_circle.h"
 #include "NIA_line.h"
-#include "NIA_errors.h"
+//#include "NIA_errors.h"
 
-
-struct Event
-{
-	HWND hwnd;
-	UINT uMsg;
-	WPARAM wParam;
-	LPARAM lParam;
-};
 
 
 
@@ -94,13 +90,6 @@ namespace NIA
 }
 
 
-void NIA_GetCursorPosition(HDC hdc, Point* p);
-void NIA_GetCursorPosition(Event* e, Point* p);
-Point NIA_GetCursorPosition(HDC hdc);
-Point NIA_GetCursorPosition(Event* e);
-
-
-
 void NIA_SetCurrentBitmap(HDC dst_hdc, HBITMAP dst_bitmap);
 
 void NIA_BitmapCopy(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst);
@@ -117,16 +106,6 @@ namespace NIA
 	HINSTANCE GetInstanceFromHwnd(HWND hwnd);
 	HBITMAP LoadBitmapImage(HWND hwnd, const wstring& path, int width, int height);
 }
-
-
-
-/* Font */
-
-HFONT NIA_LoadFont(const wstring& path, int size);
-
-void NIA_CloseFont(HFONT font);
-
-void NIA_RenderText(HDC dst_hdc, HFONT font, const wstring& text, const Rect& size);
 
 
 /* File */
