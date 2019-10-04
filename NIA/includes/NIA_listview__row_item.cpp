@@ -20,3 +20,8 @@ void LVItem::set_text(wstring text)
 	
 	ListView_SetItemText(hwnd, x, y, wchar_text);
 }
+
+wstring LVItem::get_text()
+{
+	return text;
+}

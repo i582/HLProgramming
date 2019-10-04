@@ -8,8 +8,6 @@
 
 constexpr int AUTO = -1;
 
-
-
 using LVHeader = vector <LVHeaderItem*>;
 using LVRows = vector <LVRow*>;
 
@@ -25,6 +23,7 @@ private:
 	LVHeader header;
 	LVRows rows;
 
+	LVHeaderSort header_sort;
 
 	int id;
 
@@ -47,20 +46,10 @@ public:
 	LVRow* operator[](unsigned int index);
 
 public:
-	LVHeaderItem* add_in_header(LVHeaderItem* item);
+	LVHeaderItem* add_in_header(LVHeaderItem* item, SortType type = ASC);
 	
-	LVRow* add_row(LVRow* row);
-
-
-public:
-	WNDPROC oldProc;
-
-_callbacks:
-	_callback LRESULT __stdcall proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-
-public:
-	void set_callback(WNDPROC new_proc);
+	LVRow* add_row(LVRow* row, int group_id = -1);
+	void add_group(wstring text, int group_id);
 
 
 };

@@ -13,7 +13,6 @@ struct Font
 {
 	static HFONT open(const wstring& name, int size);
 	static void close(HFONT font);
-
 };
 
 

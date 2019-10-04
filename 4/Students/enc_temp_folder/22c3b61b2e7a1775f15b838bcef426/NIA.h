@@ -1,6 +1,6 @@
 /**
 	@authors Makhnev Petr
-	@version 0.0.5
+	@version 0.0.4
 	@date 04.10.19
  */
 

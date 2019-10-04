@@ -69,7 +69,7 @@ void App::setup()
 	viewport = new Viewport(hwnd, hdc, { 30, 30, 1000, 580 });
 	setup_menu();
 
-	HFONT font = NIA_LoadFont(L"OpenSans", 16);
+	HFONT font = NIA::Font::open(L"OpenSans", 16);
 	input = CreateWindowEx(
 		NULL,
 		L"Edit", L"",

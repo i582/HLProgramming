@@ -1,6 +1,3 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
 #include "app.h"
 
 App* App::instance = nullptr;
@@ -15,8 +12,30 @@ App* App::get_instance()
 
 App::App()
 {
-	this->size.w = 1200;
-	this->size.h = 700;
+	this->size = { 0, 0, 1300, 700 };
+
+	// window part
+	this->msg = {};
+	this->hwnd = nullptr;
+	this->hdc = nullptr;
+	this->wc = {};
+	this->ps = {};
+	this->mouse = {};
+	this->mouse_prev = {};
+
+	this->input = nullptr;
+
+	// menu part
+	this->hMenu = nullptr;
+	this->hFileMenu = nullptr;
+	this->hHelpMenu = nullptr;
+
+
+	// event part
+	this->e = {};
+
+	//
+	this->list = nullptr;
 }
 
 int App::init()
@@ -55,12 +74,12 @@ int App::init()
 
 	this->hdc = GetDC(hwnd);
 
+
 	return true;
 }
 
 void App::setup()
 {
-
 	setup_menu();
 
 	/*HFONT font = NIA_LoadFont(L"OpenSans", 16);
@@ -99,11 +118,12 @@ void App::setup()
 	AddListViewItems(hwndList, 3, item[2]);*/
 
 
-	list = new LView(hwnd, { 10, 10, 1400, 600 }, 1);
+	//list = new LView(hwnd, { 10, 10, 600, 600 }, 1);
 
+	csv = new CSV(L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\data.csv", L';', true);
 
-
-	HBITMAP bitmap = NIA::LoadBitmapImage(hwnd, L"modules\\app\\3.bmp", 200, 200);
+	list = csv->make_table(hwnd, { 10, 10, 700, 600 }, 1, { 30, 200, 150, 150, 150 });
+	/*HBITMAP bitmap = NIA::LoadBitmapImage(hwnd, L"modules\\app\\3.bmp", 200, 200);
 
 	HIMAGELIST images = ImageList_Create(
 		200, 200,
@@ -117,26 +137,31 @@ void App::setup()
 
 	ListView_SetImageList(list->get_hwnd(), images, LVSIL_SMALL);
 	ListView_SetImageList(list->get_hwnd(), images, LVSIL_NORMAL);
-	ListView_SetImageList(list->get_hwnd(), images, LVSIL_STATE);
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_STATE);*/
 
-
+/*
 
 	list->add_in_header(new LVHeaderItem(L"#", 20));
 	list->add_in_header(new LVHeaderItem(L"ФИО", 200));
-	list->add_in_header(new LVHeaderItem(L"Математика", 200));
-	list->add_in_header(new LVHeaderItem(L"Русский язык", 150));
+	list->add_in_header(new LVHeaderItem(L"Математика", 100));
+	list->add_in_header(new LVHeaderItem(L"Русский язык", 100));
 	list->add_in_header(new LVHeaderItem(L"Английский язык", 150));
 
-	list->add_row(new LVRow(list));
-	list->add_row(new LVRow(list));
-	list->add_row(new LVRow(list));
-	list->add_row(new LVRow(list));
+	list->add_group(L"Математика", 3);
+	list->add_group(L"Математика111", 4);
+
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 4);
+
+
 	 
 	list->at(1)->at(0)->set_text(L"Текст");
-	list->at(0)->at(0)->set_text(L"Текст2");
-	list->at(1)->at(0)->set_text(L"Текст3");
-	list->at(2)->at(0)->set_text(L"Текст4");
-	list->at(3)->at(0)->set_text(L"Текст5");
+	list->at(0)->at(0)->set_text(L"1");
+	list->at(1)->at(0)->set_text(L"24");
+	list->at(2)->at(0)->set_text(L"5");
+	list->at(3)->at(0)->set_text(L"4");
 
 	list->at(0)->at(1)->set_text(L"Текст2");
 	list->at(1)->at(1)->set_text(L"Текст3");
@@ -148,12 +173,28 @@ void App::setup()
 	list->at(2)->at(2)->set_text(L"Текст4");
 	list->at(3)->at(2)->set_text(L"Текст5");
 	
+*/
+	list_max_math = new LView(hwnd, { 720, 10, 300, 300 }, 2);
+
+	list_max_math->add_in_header(new LVHeaderItem(L"#", 20));
+	list_max_math->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list_max_math->add_in_header(new LVHeaderItem(L"Математика", 100));
 
 
+	list_max_rus = new LView(hwnd, { 1040, 10, 320, 300 }, 2);
+
+	list_max_rus->add_in_header(new LVHeaderItem(L"#", 20));
+	list_max_rus->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list_max_rus->add_in_header(new LVHeaderItem(L"Русский язык", 100));
+
+	
+	
+
+	NIA::Error::show_last();
 
 	//HBITMAP bitmap = LoadBitmap(hInst, L"1.bmp");
 
-	NIA_ShowErrorDescriptionByErrorId(GetLastError());
+	//NIA_ShowErrorDescriptionByErrorId(GetLastError());
 
 	/*list->add_collumn(L"#", 20);
 	list->add_collumn(L"ФИО", 200, ListViewAlign::CENTERED);
@@ -203,10 +244,21 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	e = { hwnd, uMsg, wParam, lParam };
 
+
+
 	switch (uMsg)
 	{
 
-	
+	case WM_CREATE:
+	{
+		status_bar = new StatusBar(hwnd, 10);
+		status_bar->set_parts(4, { 100, 200, 200, 100 });
+		status_bar->set_text(0, L"100%");
+		status_bar->set_tooltip(0, L"Scale");
+		status_bar->set_icon(0, NIA::LoadIconImage(hwnd, L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\modules\\app\\1.ico", 30, 30));
+		return 0;
+	}
+
 	case WM_NOTIFY:
 	{
 		
@@ -230,6 +282,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//MessageBox(NULL, L"text", L"Предупреждение", MB_ICONINFORMATION);
 		}
 
+		
 		return 0;
 	}
 
@@ -246,10 +299,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
-		NIA_GetCursorPosition(&e, &mouse);
-		NIA_GetCursorPosition(&e, &mouse_prev);
-
-	
+		mouse = NIA::Mouse::position(&e);
 		break;
 	}
 
@@ -265,14 +315,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (wParam == (MK_LBUTTON))
 		{
-			NIA_GetCursorPosition(&e, &mouse);
-
-			
-
-
-			
-
-			NIA_GetCursorPosition(&e, &mouse_prev);
+			NIA::Mouse::delta(&e);
 		}
 		break;
 	}
@@ -328,6 +371,12 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
+	case WM_SIZE:
+	{
+		SendMessage(hStatusWindow, WM_SIZE, 0, 0);
+		break;
+	}
+
 	case WM_DESTROY:
 	{
 		PostQuitMessage(EXIT_SUCCESS);
@@ -336,6 +385,9 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 
 	}
+
+
+	InitStatusBarEvent(uMsg, status_bar);
 
 	//handleUserEvent();
 
@@ -363,6 +415,7 @@ void App::setup_menu()
 	SetMenu(hwnd, hMenu);
 	UpdateWindow(hwnd);
 }
+
 
 int App::run()
 {

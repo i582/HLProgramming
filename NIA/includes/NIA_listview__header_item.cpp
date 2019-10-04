@@ -22,7 +22,7 @@ bool LVHeaderItem::init()
 
 	LVCOLUMN lvc;
 	lvc.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_FMT;
-	lvc.fmt = this->align;
+	lvc.fmt = this->align | LVCFMT_SPLITBUTTON;
 	lvc.cx = this->width;
 	lvc.cchTextMax = 255;
 	lvc.pszText = (WCHAR*)d_title->c_str();

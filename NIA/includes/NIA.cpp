@@ -76,6 +76,13 @@ HBITMAP NIA::LoadBitmapImage(HWND hwnd, const wstring& path, int width, int heig
 	return (HBITMAP)LoadImage(hInst, path.c_str(), IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
 }
 
+HICON NIA::LoadIconImage(HWND hwnd, const wstring& path, int width, int height)
+{
+	HINSTANCE hInst = NIA::GetInstanceFromHwnd(hwnd);
+	HICON icon = (HICON)LoadImage(hInst, path.c_str(), IMAGE_ICON, width, height, LR_LOADFROMFILE);
+	return icon;
+}
+
 void NIA_RenderText(HDC dst_hdc, HFONT font, const wstring& text, const Rect& size)
 {
 	SelectFont(dst_hdc, font);
@@ -513,6 +520,18 @@ wstring NIA::to_wstring(float num, int accuracy)
 	return str.substr(0, str.find('.') + accuracy + 1);
 }
 
+wstring NIA::to_wstring(string str)
+{
+	setlocale(LC_ALL, "ru-RU.utf-8");
+
+	wstring wstr;
+	wstr.resize(str.length());
+
+	mbstowcs(&wstr[0], &str[0], str.length());
+
+	return wstr;
+}
+
 
 vector<wstring>* NIA::to_wstring(vector<int>* nums)
 {
@@ -817,4 +836,42 @@ HexColor NIA::rgb(unsigned char r, unsigned char g, unsigned char b)
 	bgr_color = r | (g << 8) | (b << 16);
 
 	return bgr_color;
+}
+
+bool NIA::is_number(string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) < '0' || str.at(i) > '9')
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool NIA::is_number(const char* str)
+{
+	string str1(str);
+	return is_number(str1);
+}
+
+bool NIA::is_number(wstring str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) < L'0' || str.at(i) > L'9')
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool NIA::is_number(const wchar_t* str)
+{
+	wstring str1(str);
+	return is_number(str1);
 }

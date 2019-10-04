@@ -24,5 +24,5 @@ public:
 
 public:
 	void set_text(wstring text);
-
+	wstring get_text();
 };

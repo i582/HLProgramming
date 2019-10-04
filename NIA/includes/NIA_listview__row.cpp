@@ -5,6 +5,7 @@ LVRow::LVRow(LView* parent)
 {
 	this->parent = parent;
 	this->hwnd = parent->get_hwnd();
+	this->header_sort = nullptr;
 }
 
 LVItem* LVRow::at(unsigned int index)
@@ -26,4 +27,9 @@ LVItem* LVRow::add(LVItem* item)
 	}
 
 	return nullptr;
+}
+
+void LVRow::set_header_sort(LVHeaderSort* header_sort)
+{
+	this->header_sort = header_sort;
 }

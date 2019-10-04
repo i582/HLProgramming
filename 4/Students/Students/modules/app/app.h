@@ -7,6 +7,8 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include "NIA.h"
 #include "NIA_listview.h"
+#include "NIA_statusbar.h"
+#include "NIA_csv.h"
 
 #include "commctrl.h"
 
@@ -50,8 +52,8 @@ public:
 	HMENU hFileMenu;
 	HMENU hHelpMenu;
 
-	// table
-	HWND hwndList;
+	// status 
+	HWND hStatusWindow;
 
 	// event part
 	Event e;
@@ -59,6 +61,15 @@ public:
 	//
 	LView* list;
 
+	LView* list_max_math;
+	LView* list_max_rus;
+	LView* list_max_eng;
+
+	//
+	StatusBar* status_bar;
+
+	//
+	CSV* csv;
 
 private:
 	int init();
@@ -71,7 +82,6 @@ private:
 
 private:
 	void setup_menu();
-
 
 _callbacks:
 	_callback LRESULT WINAPI StaticWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

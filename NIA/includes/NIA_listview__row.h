@@ -6,6 +6,7 @@
 
 #include "NIA_listview__row_item.h"
 
+
 class LView;
 
 class LVRow
@@ -19,6 +20,8 @@ private:
 	HWND hwnd;
 
 	vector <LVItem* > items;
+
+	LVHeaderSort* header_sort;
 
 public:
 	LVRow(LView* parent);
@@ -34,4 +37,6 @@ public:
 public:
 	LVItem* add(LVItem* item);
 
+
+	void set_header_sort(LVHeaderSort* header_sort);
 };
