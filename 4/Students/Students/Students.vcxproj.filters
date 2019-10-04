@@ -66,6 +66,12 @@
     <ClCompile Include="..\..\..\NIA\includes\NIA_csv.cpp">
       <Filter>Исходные файлы\NIA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\app\app.h">
@@ -81,6 +87,15 @@
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NIA\includes\NIA_file.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
   </ItemGroup>

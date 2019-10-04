@@ -16,7 +16,7 @@ void Object::init()
 {
 	hdc = CreateCompatibleDC(parent_hdc);
 	bitmap = CreateCompatibleBitmap(parent_hdc, size.w, size.h);
-	NIA_SetCurrentBitmap(hdc, bitmap);
+	NIA::Render::setCurrentBitmap(hdc, bitmap);
 }
 
 void Object::adjust(Point& p)

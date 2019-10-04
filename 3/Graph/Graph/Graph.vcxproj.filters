@@ -110,5 +110,17 @@
     <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp">
+      <Filter>Исходные файлы\modules\NIA</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

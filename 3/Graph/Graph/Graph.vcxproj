@@ -32,13 +32,17 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\NIA\includes\NIA.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp" />
     <ClCompile Include="modules\app\app.cpp" />
     <ClCompile Include="modules\graph\graph.cpp" />
     <ClCompile Include="modules\main.cpp" />

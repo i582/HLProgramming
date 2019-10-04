@@ -35,7 +35,7 @@ void Viewport::render()
 	graph->render();
 	
 
-	NIA_BitmapCopy(parent_hdc, hdc, nullptr, &size);
+	NIA::Render::bitmapCopy(parent_hdc, hdc, nullptr, &size);
 }
 
 void Viewport::setup()

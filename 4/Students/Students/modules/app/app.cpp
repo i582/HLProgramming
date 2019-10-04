@@ -255,33 +255,13 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		status_bar->set_parts(4, { 100, 200, 200, 100 });
 		status_bar->set_text(0, L"100%");
 		status_bar->set_tooltip(0, L"Scale");
-		status_bar->set_icon(0, NIA::LoadIconImage(hwnd, L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\modules\\app\\1.ico", 30, 30));
+		status_bar->set_icon(0, NIA::Image::loadIcon(hwnd, L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\modules\\app\\1.ico", 30, 30));
 		return 0;
 	}
 
 	case WM_NOTIFY:
 	{
-		
-		LPNMHDR lpnmh = (LPNMHDR)lParam;
-
-		if (lpnmh->code == LVN_COLUMNCLICK)
-		{
-			NMLISTVIEW* pListView = (NMLISTVIEW*)lParam;
-			HWND list_hwnd = list->get_hwnd();
-			ListView_SortItems(list_hwnd, LView::comp_func, (LPARAM)pListView->iSubItem);
-			//NIA_ShowErrorDescriptionByErrorId(GetLastError());
-
-			WCHAR wchar_inp[255];
-			wstring w_text;
-			w_text.resize(50);
-
-			ListView_GetItemText(hwnd, 1, 2, &w_text[0], 255);
-			//NIA_ShowErrorDescriptionByErrorId(GetLastError());
-
-			return 0;
-			//MessageBox(NULL, L"text", L"Предупреждение", MB_ICONINFORMATION);
-		}
-
+		InitListViewEvent(list, LView::comp_func);
 		
 		return 0;
 	}
@@ -305,7 +285,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_HOTKEY:
 	{
-
+		
 
 		break;
 	}
@@ -388,7 +368,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 
 	InitStatusBarEvent(uMsg, status_bar);
-
+	
 	//handleUserEvent();
 
 

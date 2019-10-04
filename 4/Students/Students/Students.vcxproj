@@ -26,11 +26,13 @@
     <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp" />
     <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp" />
     <ClCompile Include="modules\app\app.cpp" />
     <ClCompile Include="modules\main.cpp" />
@@ -39,7 +41,10 @@
     <ClInclude Include="..\..\..\NIA\includes\NIA_csv.h" />
     <ClInclude Include="..\..\..\NIA\includes\NIA_error.h" />
     <ClInclude Include="..\..\..\NIA\includes\NIA_file.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h" />
     <ClInclude Include="..\..\..\NIA\includes\NIA_statusbar.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h" />
     <ClInclude Include="modules\app\app.h" />
   </ItemGroup>
   <ItemGroup>

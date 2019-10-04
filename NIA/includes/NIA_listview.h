@@ -55,3 +55,16 @@ public:
 };
 
 
+#define InitListViewEvent(list, comp_func) \
+\
+LPNMHDR lpnmh = (LPNMHDR)lParam;\
+\
+if (lpnmh->code == LVN_COLUMNCLICK)\
+{\
+	NMLISTVIEW* pListView = (NMLISTVIEW*)lParam;\
+	HWND list_hwnd = list->get_hwnd();\
+	ListView_SortItems(list_hwnd, comp_func, (LPARAM)pListView->iSubItem);\
+	\
+	return 0;\
+}\
+

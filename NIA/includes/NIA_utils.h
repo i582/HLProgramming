@@ -1,29 +1,10 @@
-/**
-	@authors Makhnev Petr
-	@version 0.0.4
-	@date 04.10.19
- */
-
 #pragma once
 
-#include "NIA_main.h"
-#include "NIA_event.h"
-#include "NIA_mouse.h"
-#include "NIA_file.h"
-#include "NIA_draw.h"
-#include "NIA_font.h"
-#include "NIA_point.h"
-#include "NIA_point2D.h"
-#include "NIA_rect.h"
-#include "NIA_circle.h"
-#include "NIA_line.h"
-#include "NIA_error.h"
-
-
-
+#include "NIA.h"
 
 namespace NIA
 {
+
 	int to_integer(wstring str);
 	int to_integer(string str);
 	int to_integer(char* str);
@@ -99,34 +80,3 @@ namespace NIA
 	bool is_number(wstring str);
 	bool is_number(const wchar_t* str);
 }
-
-
-void NIA_SetCurrentBitmap(HDC dst_hdc, HBITMAP dst_bitmap);
-
-void NIA_BitmapCopy(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst);
-
-
-namespace NIA
-{
-	HINSTANCE GetInstanceFromHwnd(HWND hwnd);
-	HBITMAP LoadBitmapImage(HWND hwnd, const wstring& path, int width, int height);
-	HICON LoadIconImage(HWND hwnd, const wstring& path, int width, int height);
-}
-
-
-/* File */
-
-
-
-wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter);
-wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter);
-
-HANDLE NIA_OpenFile(const wstring& path, DWORD dwAccess = GENERIC_READ | GENERIC_WRITE, DWORD dwShareMode = FILE_SHARE_READ);
-
-void* NIA_ReadFile(HWND hwnd, LPCWSTR filter);
-void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count);
-
-/**/
-
-void NIA_ShowLastError();
-

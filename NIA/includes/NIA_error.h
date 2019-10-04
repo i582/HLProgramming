@@ -28,6 +28,11 @@ namespace NIA
 			где расположена данная функция. Задается макросом __FILE__.
 		*/
 		static void show_last(int line = -1, string path = "");
+
+		/**
+			@brief Сбрасывает последнюю ошибку в ноль
+		 */
+		static void reset();
 	};
 
 

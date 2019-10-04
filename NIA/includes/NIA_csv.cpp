@@ -40,7 +40,7 @@ LView* NIA::CSV::make_table(HWND hwnd, Rect size, int id, vector<int> widths)
 	for (size_t i = 0; i < matrix.at(0)->size(); i++)
 	{
 		auto& header_item = matrix.at(0)->at(i);
-		list->add_in_header(new LVHeaderItem(header_item, widths.at(i)), i == 0 ? DESC : ASC);
+		list->add_in_header(new LVHeaderItem(header_item, widths.at(i)), i == 0 || i == 1 ? DESC : ASC);
 	}
 
 	// fictive group

@@ -284,7 +284,10 @@ void App::notify(UEvent* ue)
 	if (ue->common.action == SAVE_POINTS)
 	{
 		string* data = (string*)ue->common.data;
-		NIA_WriteFile(hwnd, L"txt files(*.txt)\0*.txt\0", (char*)data->c_str(), data->size());
+		
+		NIA::File::writeToDialogFile(hwnd, L"txt files(*.txt)\0*.txt\0", (char*)data->c_str(), data->size());
+
+
 		MessageBox(NULL, L"Файл сохранен!", L"Сохранение успешно", MB_ICONINFORMATION);
 	}
 
@@ -351,7 +354,7 @@ void App::setup_menu()
 
 void App::open_file()
 {
-	char* buffer = (char*)NIA_ReadFile(hwnd, L"txt files(*.txt)\0*.txt\0");
+	char* buffer = (char*)NIA::File::readFromDialogFile(hwnd, L"txt files(*.txt)\0*.txt\0");
 	string str(buffer);
 	vector<Point2D>* points = Point2D::to_points(to_double(NIA::split(str, " \t\n")));
 
