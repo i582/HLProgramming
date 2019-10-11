@@ -5,9 +5,11 @@ name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 
-#include "../NIA/NIA.h"
+#include "NIA.h"
 #include "../u_event/user_event.h"
 #include "../object/viewport/viewport.h"
+
+
 
 using namespace NIA;
 

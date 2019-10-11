@@ -1,5 +1,6 @@
 #include "NIA.h"
 
+<<<<<<< HEAD
 void NIA_GetCursorPosition(HDC hdc, Point* p)
 {
 	POINT point;
@@ -236,6 +237,8 @@ void NIA_ShowLastError()
 
 
 
+=======
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 int NIA::to_integer(wstring str)
 {
 	return stoi(str);
@@ -534,6 +537,21 @@ wstring NIA::to_wstring(float num, int accuracy)
 	return str.substr(0, str.find('.') + accuracy + 1);
 }
 
+<<<<<<< HEAD
+=======
+wstring NIA::to_wstring(string str)
+{
+	setlocale(LC_ALL, "ru-RU.utf-8");
+
+	wstring wstr;
+	wstr.resize(str.length());
+
+	mbstowcs(&wstr[0], &str[0], str.length());
+
+	return wstr;
+}
+
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 
 vector<wstring>* NIA::to_wstring(vector<int>* nums)
 {
@@ -620,7 +638,10 @@ vector<string>* NIA::split(string str, char symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
+<<<<<<< HEAD
 			temp = "";
+=======
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		}
 		else
 		{
@@ -628,7 +649,11 @@ vector<string>* NIA::split(string str, char symbol)
 		}
 	}
 
+<<<<<<< HEAD
 	if (temp != "")
+=======
+	if (!temp.empty())
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -665,7 +690,10 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 		{
 			result->push_back(temp);
 			temp.clear();
+<<<<<<< HEAD
 			temp = "";
+=======
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 			is_sep = false;
 		}
 		else
@@ -675,7 +703,11 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 
 	}
 
+<<<<<<< HEAD
 	if (temp != "")
+=======
+	if (!temp.empty())
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -694,7 +726,10 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
+<<<<<<< HEAD
 			temp = L"";
+=======
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		}
 		else
 		{
@@ -702,7 +737,11 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		}
 	}
 
+<<<<<<< HEAD
 	if (temp != L"")
+=======
+	if (!temp.empty())
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -737,7 +776,10 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 		{
 			result->push_back(temp);
 			temp.clear();
+<<<<<<< HEAD
 			temp = L"";
+=======
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 			is_sep = false;
 		}
 		else
@@ -747,7 +789,11 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 
 	}
 
+<<<<<<< HEAD
 	if (temp != L"")
+=======
+	if (!temp.empty())
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -842,4 +888,46 @@ HexColor NIA::rgb(unsigned char r, unsigned char g, unsigned char b)
 	bgr_color = r | (g << 8) | (b << 16);
 
 	return bgr_color;
+<<<<<<< HEAD
 }
+=======
+}
+
+bool NIA::is_number(string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) < '0' || str.at(i) > '9')
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool NIA::is_number(const char* str)
+{
+	string str1(str);
+	return is_number(str1);
+}
+
+bool NIA::is_number(wstring str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) < L'0' || str.at(i) > L'9')
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool NIA::is_number(const wchar_t* str)
+{
+	wstring str1(str);
+	return is_number(str1);
+}
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d

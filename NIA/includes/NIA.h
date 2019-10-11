@@ -1,15 +1,32 @@
 /**
+<<<<<<< HEAD
  *  Version 0.0.2
+=======
+	@authors Makhnev Petr
+	@version 0.0.6
+	@date 05.10.19
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
  */
 
 #pragma once
 
 #include "NIA_main.h"
+<<<<<<< HEAD
+=======
+#include "NIA_event.h"
+#include "NIA_mouse.h"
+#include "NIA_file.h"
+#include "NIA_render.h"
+#include "NIA_draw.h"
+#include "NIA_image.h"
+#include "NIA_font.h"
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 #include "NIA_point.h"
 #include "NIA_point2D.h"
 #include "NIA_rect.h"
 #include "NIA_circle.h"
 #include "NIA_line.h"
+<<<<<<< HEAD
 
 
 
@@ -133,3 +150,9 @@ void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count);
 /**/
 
 void NIA_ShowLastError();
+=======
+#include "NIA_error.h"
+#include "NIA_utils.h"
+
+
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d

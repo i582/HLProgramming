@@ -19,21 +19,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\NIA\includes\NIA.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_csv.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp" />
+    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp" />
     <ClCompile Include="modules\app\app.cpp" />
     <ClCompile Include="modules\main.cpp" />
-    <ClCompile Include="modules\NIA\NIA.cpp" />
-    <ClCompile Include="modules\NIA\NIA_listview.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_csv.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_error.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_file.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_statusbar.h" />
+    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h" />
     <ClInclude Include="modules\app\app.h" />
-    <ClInclude Include="modules\NIA\NIA.h" />
-    <ClInclude Include="modules\NIA\NIA_circle.h" />
-    <ClInclude Include="modules\NIA\NIA_line.h" />
-    <ClInclude Include="modules\NIA\NIA_listview.h" />
-    <ClInclude Include="modules\NIA\NIA_main.h" />
-    <ClInclude Include="modules\NIA\NIA_point.h" />
-    <ClInclude Include="modules\NIA\NIA_point2D.h" />
-    <ClInclude Include="modules\NIA\NIA_rect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -86,7 +101,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>E:\Programming\HLProgramming\NIA\includes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

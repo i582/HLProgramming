@@ -9,10 +9,11 @@ class Viewport : public Object
 private:
 	double scale;
 	Graph* graph;
+	HFONT font;
 
 public:
 	Viewport(HWND hwnd, HDC parent_hdc, Rect size);
-
+	~Viewport();
 
 public:
 	void render();

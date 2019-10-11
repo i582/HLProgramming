@@ -27,10 +27,49 @@
     <ClCompile Include="modules\app\app.cpp">
       <Filter>Исходные файлы\app</Filter>
     </ClCompile>
-    <ClCompile Include="modules\NIA\NIA.cpp">
+    <ClCompile Include="..\..\..\NIA\includes\NIA.cpp">
       <Filter>Исходные файлы\NIA</Filter>
     </ClCompile>
-    <ClCompile Include="modules\NIA\NIA_listview.cpp">
+    <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_csv.cpp">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,29 +77,29 @@
     <ClInclude Include="modules\app\app.h">
       <Filter>Исходные файлы\app</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_error.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_listview.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_statusbar.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_point.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_csv.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_rect.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_file.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_circle.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_point2D.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_main.h">
+    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h">
       <Filter>Исходные файлы\NIA</Filter>
     </ClInclude>
-    <ClInclude Include="modules\NIA\NIA_line.h">
-      <Filter>Исходные файлы\NIA</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

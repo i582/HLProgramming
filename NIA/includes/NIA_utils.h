@@ -1,30 +1,10 @@
-/**
- *  Version 0.0.2
- */
-
 #pragma once
 
-#include "NIA_main.h"
-#include "NIA_point.h"
-#include "NIA_point2D.h"
-#include "NIA_rect.h"
-#include "NIA_circle.h"
-#include "NIA_line.h"
-
-
-
-struct Event
-{
-	HWND hwnd;
-	UINT uMsg;
-	WPARAM wParam;
-	LPARAM lParam;
-};
-
-
+#include "NIA.h"
 
 namespace NIA
 {
+
 	int to_integer(wstring str);
 	int to_integer(string str);
 	int to_integer(char* str);
@@ -68,6 +48,8 @@ namespace NIA
 	wstring to_wstring(double num, int accuracy = 2);
 	wstring to_wstring(float num, int accuracy = 2);
 
+	wstring to_wstring(string str);
+
 	vector<wstring>* to_wstring(vector<int>* nums);
 	vector<wstring>* to_wstring(vector<long>* nums);
 	vector<wstring>* to_wstring(vector<float>* nums, int accuracy = 2);
@@ -91,45 +73,10 @@ namespace NIA
 	HexColor rgb(HexColor bgr);
 	HexColor rgb(unsigned char r, unsigned char g, unsigned char b);
 
+
+	bool is_number(string str);
+	bool is_number(const char* str);
+
+	bool is_number(wstring str);
+	bool is_number(const wchar_t* str);
 }
-
-
-void NIA_GetCursorPosition(HDC hdc, Point* p);
-void NIA_GetCursorPosition(Event* e, Point* p);
-Point NIA_GetCursorPosition(HDC hdc);
-Point NIA_GetCursorPosition(Event* e);
-
-
-void NIA_SetCurrentBitmap(HDC dst_hdc, HBITMAP dst_bitmap);
-
-void NIA_BitmapCopy(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst);
-
-void NIA_FillRect(HDC dst_hdc, Rect rect, HexColor color, HexColor border_color = 0x000000, int thickness = 0);
-
-void NIA_DrawLine(HDC dst_hdc, Line line, HexColor color, int thickness = 1);
-
-void NIA_FillEllipse(HDC dst_hdc, Point point, int radius, HexColor color, HexColor border_color = 0x000000, int thickness = 0);
-
-
-/* Font */
-
-HFONT NIA_LoadFont(wstring path, int size);
-
-void NIA_CloseFont(HFONT font);
-
-void NIA_RenderText(HDC dst_hdc, HFONT font, wstring text, Rect size);
-
-
-/* File */
-
-wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter);
-wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter);
-
-HANDLE NIA_OpenFile(wstring path, DWORD dwAccess = GENERIC_READ | GENERIC_WRITE, DWORD dwShareMode = FILE_SHARE_READ);
-
-void* NIA_ReadFile(HWND hwnd, LPCWSTR filter);
-void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count);
-
-/**/
-
-void NIA_ShowLastError();

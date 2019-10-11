@@ -12,8 +12,30 @@ App* App::get_instance()
 
 App::App()
 {
-	this->size.w = 1200;
-	this->size.h = 700;
+	this->size = { 0, 0, 1300, 700 };
+
+	// window part
+	this->msg = {};
+	this->hwnd = nullptr;
+	this->hdc = nullptr;
+	this->wc = {};
+	this->ps = {};
+	this->mouse = {};
+	this->mouse_prev = {};
+
+	this->input = nullptr;
+
+	// menu part
+	this->hMenu = nullptr;
+	this->hFileMenu = nullptr;
+	this->hHelpMenu = nullptr;
+
+
+	// event part
+	this->e = {};
+
+	//
+	this->list = nullptr;
 }
 
 int App::init()
@@ -52,69 +74,8 @@ int App::init()
 
 	this->hdc = GetDC(hwnd);
 
+
 	return true;
-}
-
-BOOL WINAPI AddListViewItems(HWND hWndLV, int colNum, WCHAR** item)
-{
-	int iLastIndex = ListView_GetItemCount(hWndLV);
-
-	LVITEM lvi;
-	lvi.mask = LVIF_TEXT;
-	lvi.cchTextMax = 255;
-	lvi.iItem = iLastIndex;
-	lvi.pszText = item[0];
-	lvi.iSubItem = 0;
-
-	if (ListView_InsertItem(hWndLV, &lvi) == -1)
-		return FALSE;
-	for (int i = 1; i < colNum + 1; i++)
-		ListView_SetItemText(hWndLV, iLastIndex, i, item[i]);
-
-	return TRUE;
-}
-
-int SetListViewColumns(HWND hWndLV, int colNum, WCHAR** header)
-{
-	RECT rcl;
-	GetClientRect(hWndLV, &rcl);
-
-	int index = -1;
-
-	LVCOLUMN lvc;
-	lvc.mask = LVCF_TEXT | LVCF_WIDTH;
-	lvc.cx = (rcl.right - rcl.left) / colNum;
-	lvc.cchTextMax = 255;
-
-	for (int i = 0; i < colNum; i++)
-	{
-		lvc.pszText = header[i];
-		index = ListView_InsertColumn(hWndLV, i, &lvc);
-		if (index == -1) break;
-	}
-
-	return index;
-}
-
-HWND CreateListView(HWND hWndParent, UINT uId)
-{
-	INITCOMMONCONTROLSEX icex;
-	icex.dwSize = sizeof(INITCOMMONCONTROLSEX);
-	icex.dwICC = ICC_LISTVIEW_CLASSES;
-	InitCommonControlsEx(&icex);
-
-	RECT rcl = { 0, 0, 500, 500 };
-
-	HWND hwndList = CreateWindow(WC_LISTVIEW, L"",
-		WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
-		10, 10, 700, 500,
-		hWndParent, (HMENU)12, nullptr, nullptr);
-
-	// Чтобы определялись строка (item) и столбец (subitem) обязательно устанавливаем
-	// расширенный стиль LVS_EX_FULLROWSELECT.
-	ListView_SetExtendedListViewStyleEx(hwndList, 0, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_DOUBLEBUFFER | LVS_EX_HEADERDRAGDROP | LVS_EX_UNDERLINECOLD);
-
-	return (hwndList);
 }
 
 void App::setup()
@@ -157,16 +118,83 @@ void App::setup()
 	AddListViewItems(hwndList, 3, item[2]);*/
 
 
-	NIA::ListView* list;
-	list = new ListView(hwnd, { 100, 100, 1000, 300 }, 1);
+	//list = new LView(hwnd, { 10, 10, 600, 600 }, 1);
 
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"#", 20));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"ФИО", 200))->fixed();
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Математика", 200));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Русский язык", 150));
-	list->add_header_collumn(new ListViewHeaderCollumn(list, L"Английский язык", 150));
+	csv = new CSV(L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\data.csv", L';', true);
 
-	list->add_row();
+	list = csv->make_table(hwnd, { 10, 10, 700, 600 }, 1, { 30, 200, 150, 150, 150 });
+	/*HBITMAP bitmap = NIA::LoadBitmapImage(hwnd, L"modules\\app\\3.bmp", 200, 200);
+
+	HIMAGELIST images = ImageList_Create(
+		200, 200,
+		ILC_COLOR32, 9, 1);
+
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+	ImageList_Add(images, bitmap, NULL);
+
+
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_SMALL);
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_NORMAL);
+	ListView_SetImageList(list->get_hwnd(), images, LVSIL_STATE);*/
+
+/*
+
+	list->add_in_header(new LVHeaderItem(L"#", 20));
+	list->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list->add_in_header(new LVHeaderItem(L"Математика", 100));
+	list->add_in_header(new LVHeaderItem(L"Русский язык", 100));
+	list->add_in_header(new LVHeaderItem(L"Английский язык", 150));
+
+	list->add_group(L"Математика", 3);
+	list->add_group(L"Математика111", 4);
+
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 3);
+	list->add_row(new LVRow(list), 4);
+
+
+	 
+	list->at(1)->at(0)->set_text(L"Текст");
+	list->at(0)->at(0)->set_text(L"1");
+	list->at(1)->at(0)->set_text(L"24");
+	list->at(2)->at(0)->set_text(L"5");
+	list->at(3)->at(0)->set_text(L"4");
+
+	list->at(0)->at(1)->set_text(L"Текст2");
+	list->at(1)->at(1)->set_text(L"Текст3");
+	list->at(2)->at(1)->set_text(L"Текст4");
+	list->at(3)->at(1)->set_text(L"Текст5");
+
+	list->at(0)->at(2)->set_text(L"Текст2");
+	list->at(1)->at(2)->set_text(L"Текст3");
+	list->at(2)->at(2)->set_text(L"Текст4");
+	list->at(3)->at(2)->set_text(L"Текст5");
+	
+*/
+	list_max_math = new LView(hwnd, { 720, 10, 300, 300 }, 2);
+
+	list_max_math->add_in_header(new LVHeaderItem(L"#", 20));
+	list_max_math->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list_max_math->add_in_header(new LVHeaderItem(L"Математика", 100));
+
+
+	list_max_rus = new LView(hwnd, { 1040, 10, 320, 300 }, 2);
+
+	list_max_rus->add_in_header(new LVHeaderItem(L"#", 20));
+	list_max_rus->add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list_max_rus->add_in_header(new LVHeaderItem(L"Русский язык", 100));
+
+	
+	
+
+	NIA::Error::show_last();
+
+	//HBITMAP bitmap = LoadBitmap(hInst, L"1.bmp");
+
+	//NIA_ShowErrorDescriptionByErrorId(GetLastError());
 
 	/*list->add_collumn(L"#", 20);
 	list->add_collumn(L"ФИО", 200, ListViewAlign::CENTERED);
@@ -217,14 +245,32 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	e = { hwnd, uMsg, wParam, lParam };
 
 
+
 	switch (uMsg)
 	{
 
+	case WM_CREATE:
+	{
+		status_bar = new StatusBar(hwnd, 10);
+		status_bar->set_parts(4, { 100, 200, 200, 100 });
+		status_bar->set_text(0, L"100%");
+		status_bar->set_tooltip(0, L"Scale");
+		status_bar->set_icon(0, NIA::Image::loadIcon(hwnd, L"E:\\Programming\\HLProgramming\\4\\Students\\Students\\modules\\app\\1.ico", 30, 30));
+		return 0;
+	}
+
+	case WM_NOTIFY:
+	{
+		InitListViewEvent(list, LView::comp_func);
+		
+		return 0;
+	}
 
 
 
 	case WM_PAINT:
 	{
+
 		HDC hdc_temp = BeginPaint(hwnd, &ps);
 		
 		EndPaint(hwnd, &ps);
@@ -233,16 +279,13 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
-		NIA_GetCursorPosition(&e, &mouse);
-		NIA_GetCursorPosition(&e, &mouse_prev);
-
-	
+		mouse = NIA::Mouse::position(&e);
 		break;
 	}
 
 	case WM_HOTKEY:
 	{
-
+		
 
 		break;
 	}
@@ -252,14 +295,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (wParam == (MK_LBUTTON))
 		{
-			NIA_GetCursorPosition(&e, &mouse);
-
-			
-
-
-			
-
-			NIA_GetCursorPosition(&e, &mouse_prev);
+			NIA::Mouse::delta(&e);
 		}
 		break;
 	}
@@ -315,6 +351,12 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
+	case WM_SIZE:
+	{
+		SendMessage(hStatusWindow, WM_SIZE, 0, 0);
+		break;
+	}
+
 	case WM_DESTROY:
 	{
 		PostQuitMessage(EXIT_SUCCESS);
@@ -324,6 +366,9 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	}
 
+
+	InitStatusBarEvent(uMsg, status_bar);
+	
 	//handleUserEvent();
 
 
@@ -346,10 +391,11 @@ void App::setup_menu()
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_DELETE, L"&Включить удаление");
 	AppendMenu(hFileMenu, MF_UNCHECKED | MF_POPUP, (UINT)ENABLE_ADD, L"&Включить добавление");
 
-
+	
 	SetMenu(hwnd, hMenu);
 	UpdateWindow(hwnd);
 }
+
 
 int App::run()
 {

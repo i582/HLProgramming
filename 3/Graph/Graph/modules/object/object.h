@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../NIA/NIA.h"
+#include "NIA.h"
 
 class Object
 {

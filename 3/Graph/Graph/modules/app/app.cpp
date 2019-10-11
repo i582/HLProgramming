@@ -69,7 +69,7 @@ void App::setup()
 	viewport = new Viewport(hwnd, hdc, { 30, 30, 1000, 580 });
 	setup_menu();
 
-	HFONT font = NIA_LoadFont(L"OpenSans", 16);
+	HFONT font = NIA::Font::open(L"OpenSans", 16);
 	input = CreateWindowEx(
 		NULL,
 		L"Edit", L"",
@@ -149,8 +149,7 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 	{
-		NIA_GetCursorPosition(&e, &mouse);
-		NIA_GetCursorPosition(&e, &mouse_prev);
+		mouse = NIA::Mouse::position(&e);
 
 		if (viewport->on_hover(mouse))
 		{
@@ -173,22 +172,30 @@ LRESULT App::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (wParam == (MK_LBUTTON))
 		{
-			NIA_GetCursorPosition(&e, &mouse);
-
+			/*NIA_GetCursorPosition(&e, &mouse);
 			Point delta = mouse - mouse_prev;
-			
+			NIA_GetCursorPosition(&e, &mouse_prev);*/
+
+			/*mouse = NIA::Mouse::GetPosition(&e);
+			Point delta = mouse - mouse_prev;
+			mouse_prev = NIA::Mouse::GetPosition(&e);*/
+
+			Point delta = NIA::Mouse::delta(hdc);
+
+			//Point delta = NIA::GetMouseDelta(&e, &mouse, &mouse_prev);
+
 
 			viewport->get_graph()->shift_start_position(delta);
 			viewport->render();
 
-			NIA_GetCursorPosition(&e, &mouse_prev);
+			
 		}
 		break;
 	}
 
 	case WM_MOUSEWHEEL:
 	{
-		NIA_GetCursorPosition(hdc, &mouse);
+		mouse = NIA::Mouse::position(hdc);
 		viewport->adjust(mouse);
 
 		Point before = viewport->get_graph()->normalize(mouse);
@@ -277,7 +284,10 @@ void App::notify(UEvent* ue)
 	if (ue->common.action == SAVE_POINTS)
 	{
 		string* data = (string*)ue->common.data;
-		NIA_WriteFile(hwnd, L"txt files(*.txt)\0*.txt\0", (char*)data->c_str(), data->size());
+		
+		NIA::File::writeToDialogFile(hwnd, L"txt files(*.txt)\0*.txt\0", (char*)data->c_str(), data->size());
+
+
 		MessageBox(NULL, L"Файл сохранен!", L"Сохранение успешно", MB_ICONINFORMATION);
 	}
 
@@ -344,7 +354,7 @@ void App::setup_menu()
 
 void App::open_file()
 {
-	char* buffer = (char*)NIA_ReadFile(hwnd, L"txt files(*.txt)\0*.txt\0");
+	char* buffer = (char*)NIA::File::readFromDialogFile(hwnd, L"txt files(*.txt)\0*.txt\0");
 	string str(buffer);
 	vector<Point2D>* points = Point2D::to_points(to_double(NIA::split(str, " \t\n")));
 

@@ -1,5 +1,10 @@
 #pragma once
 
+<<<<<<< HEAD
+=======
+#define _CRT_SECURE_NO_WARNINGS
+
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 #pragma comment(linker,"\"/manifestdependency:type='win32' \
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -8,7 +13,11 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #include "commctrl.h"
 #include "string"
 #include "vector"
+<<<<<<< HEAD
 
+=======
+#include "iostream"
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 using namespace std;
 
 typedef COLORREF HexColor;
@@ -35,4 +44,26 @@ typedef COLORREF HexColor;
 
 #define _interface struct
 #define _callback static
+<<<<<<< HEAD
 #define _callbacks public
+=======
+#define _callbacks public
+
+
+
+enum LVAlign
+{
+	LEFT = LVCFMT_LEFT,
+	CENTERED = LVCFMT_CENTER,
+	RIGHT = LVCFMT_RIGHT
+};
+
+
+enum SortType
+{
+	ASC,
+	DESC
+};
+
+using LVHeaderSort = vector <SortType>;
+>>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
