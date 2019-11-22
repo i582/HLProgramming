@@ -181,14 +181,17 @@ void App::setup()
 	list_max_math->add_in_header(new LVHeaderItem(L"Математика", 100));
 
 
-	list_max_rus = new LView(hwnd, { 1040, 10, 320, 300 }, 2);
+	LView list_max_rus(hwnd, { 1040, 10, 320, 300 }, 2);
 
-	list_max_rus->add_in_header(new LVHeaderItem(L"#", 20));
-	list_max_rus->add_in_header(new LVHeaderItem(L"ФИО", 200));
-	list_max_rus->add_in_header(new LVHeaderItem(L"Русский язык", 100));
+	list_max_rus.add_in_header(new LVHeaderItem(L"#", 20));
+	list_max_rus.add_in_header(new LVHeaderItem(L"ФИО", 200));
+	list_max_rus.add_in_header(new LVHeaderItem(L"Русский язык", 100));
 
+	list_max_rus.add_group(L"Математика", 3);
+
+	list_max_rus.add_row(new LVRow(&list_max_rus), 3);
 	
-	
+
 
 	NIA::Error::show_last();
 

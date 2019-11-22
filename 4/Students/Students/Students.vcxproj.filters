@@ -19,6 +19,9 @@
     <Filter Include="Исходные файлы\NIA">
       <UniqueIdentifier>{9e29ce41-783f-419a-9e57-c1fff18bd282}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\NIA\table">
+      <UniqueIdentifier>{da32dfb1-3ed0-43d3-aa6c-b72c7cf45eaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="modules\main.cpp">
@@ -97,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h">
       <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_listview.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\table\table.h">
+      <Filter>Исходные файлы\NIA\table</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

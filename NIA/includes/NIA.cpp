@@ -1,244 +1,5 @@
 #include "NIA.h"
 
-<<<<<<< HEAD
-void NIA_GetCursorPosition(HDC hdc, Point* p)
-{
-	POINT point;
-	HWND hwnd = WindowFromDC(hdc);
-	GetCursorPos(&point);
-	ScreenToClient(hwnd, &point);
-	p->x = point.x;
-	p->y = point.y;
-}
-
-void NIA_GetCursorPosition(Event* e, Point* p)
-{
-	p->x = LOWORD(e->lParam);
-	p->y = HIWORD(e->lParam);
-}
-
-Point NIA_GetCursorPosition(HDC hdc)
-{
-	Point p;
-	NIA_GetCursorPosition(hdc, &p);
-	return p;
-}
-
-Point NIA_GetCursorPosition(Event* e)
-{
-	Point p;
-	NIA_GetCursorPosition(e, &p);
-	return p;
-}
-
-void NIA_SetCurrentBitmap(HDC hdc, HBITMAP bitmap)
-{
-	SelectObject(hdc, bitmap);
-}
- 
-void NIA_BitmapCopy(HDC dst_hdc, HDC src_hdc, Rect* src, Rect* dst)
-{
-	SetStretchBltMode(dst_hdc, COLORONCOLOR);
-
-	if (src == nullptr)
-	{
-		BitBlt(dst_hdc, dst->x, dst->y, dst->w, dst->h,
-			src_hdc, 0, 0, SRCCOPY);
-		return;
-	}
-
-	BitBlt(dst_hdc, dst->x, dst->y, dst->w, dst->h,
-		src_hdc, src->x, src->y, SRCCOPY);
-}
-
-void NIA_FillRect(HDC hdc, Rect rect, HexColor color, HexColor border_color, int thickness)
-{
-	HBRUSH brush;
-	HPEN pen;
-	pen = CreatePen(PS_SOLID, thickness, border_color);
-	brush = CreateSolidBrush(color);
-	SelectBrush(hdc, brush);
-	SelectPen(hdc, pen);
-
-	FillRect(hdc, &rect.to_rect(), brush);
-
-	DeleteObject(brush);
-	DeleteObject(pen);
-}
-
-void NIA_DrawLine(HDC hdc, Line line, HexColor color, int thickness)
-{
-	HPEN pen = CreatePen(PS_SOLID, thickness, color);
-	SelectPen(hdc, pen);
-
-	MoveToEx(hdc, line.x1, line.y1, nullptr);
-	LineTo(hdc, line.x2, line.y2);
-
-	DeleteObject(pen);
-}
-
-void NIA_FillEllipse(HDC hdc, Point point, int radius, HexColor color, HexColor border_color, int thickness)
-{
-	HBRUSH brush;
-	HPEN pen;
-	pen = CreatePen(PS_SOLID, thickness, border_color);
-	brush = CreateSolidBrush(color);
-	SelectBrush(hdc, brush);
-	SelectPen(hdc, pen);
-
-	Ellipse(hdc, point.x - radius, point.y - radius, point.x + radius, point.y + radius);
-
-	DeleteObject(brush);
-	DeleteObject(pen);
-}
-
-HFONT NIA_LoadFont(wstring name, int size)
-{
-	return CreateFont(size, NULL, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, name.c_str());
-}
-
-void NIA_CloseFont(HFONT font)
-{
-	DeleteObject((HGDIOBJ)font);
-}
-
-void NIA_RenderText(HDC dst_hdc, HFONT font, wstring text, Rect size)
-{
-	SelectFont(dst_hdc, font);
-	ExtTextOut(dst_hdc, size.x, size.y, ETO_CLIPPED, NULL, text.c_str(), text.length(), NULL);
-}
-
-wstring NIA_ShowOpenFileDialog(HWND hwnd, LPCWSTR filter)
-{
-	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
-
-	WCHAR path[255] = L"\0";
-
-
-
-	of->lStructSize = sizeof(OPENFILENAME);
-	of->hwndOwner = hwnd;
-	of->hInstance = NULL;
-	of->lpstrFilter = filter;
-	of->lpstrCustomFilter = NULL;
-	of->nMaxCustFilter = NULL;
-	of->nFilterIndex = 1;
-	of->lpstrFile = path;
-	of->nMaxFile = 256;
-	of->lpstrFileTitle = NULL;
-	of->nMaxFileTitle = NULL;
-	of->lpstrInitialDir = NULL;
-	of->lpstrTitle = NULL;
-
-	of->Flags = OFN_FILEMUSTEXIST | OFN_EXPLORER;
-	of->nFileOffset = NULL;
-	of->nFileExtension = NULL;
-	of->lpstrDefExt = NULL;
-	of->lCustData = NULL;
-	of->lpfnHook = NULL;
-	of->lpTemplateName = NULL;
-
-	GetOpenFileName(of);
-	
-
-	wstring path_string = path;
-	return path_string;
-}
-
-
-wstring NIA_ShowSaveFileDialog(HWND hwnd, LPCWSTR filter)
-{
-	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
-
-	WCHAR path[255] = L"\0";
-
-	of->lStructSize = sizeof(OPENFILENAME);
-	of->hwndOwner = hwnd;
-	of->hInstance = NULL;
-	of->lpstrFilter = filter;
-	of->lpstrCustomFilter = NULL;
-	of->nMaxCustFilter = NULL;
-	of->nFilterIndex = NULL;
-	of->lpstrFile = path;
-	of->nMaxFile = 256;
-	of->lpstrFileTitle = NULL;
-	of->nMaxFileTitle = NULL;
-	of->lpstrInitialDir = NULL;
-	of->lpstrTitle = NULL;
-
-	of->Flags = NULL;
-	of->nFileOffset = NULL;
-	of->nFileExtension = NULL;
-	of->lpstrDefExt = NULL;
-	of->lCustData = NULL;
-	of->lpfnHook = NULL;
-	of->lpTemplateName = NULL;
-
-	GetSaveFileName(of);
-
-
-	wstring path_string = path;
-	return path_string;
-}
-
-HANDLE NIA_OpenFile(wstring path, DWORD dwAccess, DWORD dwShareMode)
-{
-	return CreateFile(path.c_str(), dwAccess, dwShareMode, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-}
-
-void* NIA_ReadFile(HWND hwnd, LPCWSTR filter)
-{
-	wstring path = NIA_ShowOpenFileDialog(hwnd, filter);
-
-	HANDLE file = NIA_OpenFile(path);
-
-	DWORD file_size;
-	file_size = GetFileSize(file, nullptr);
-
-	char* buffer = new char[file_size + 10];
-
-	DWORD count_read;
-
-	ReadFile(file, buffer, file_size, &count_read, nullptr);
-
-	buffer[count_read] = '\0';
-
-	CloseHandle(file);
-
-	return buffer;
-}
-
-void NIA_WriteFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count)
-{
-	wstring path = NIA_ShowSaveFileDialog(hwnd, filter);
-
-	HANDLE file = NIA_OpenFile(path);
-
-	DWORD count_read;
-
-	WriteFile(file, buffer, count, &count_read, nullptr);
-
-	CloseHandle(file);
-}
-
-void NIA_ShowLastError()
-{
-	DWORD error = GetLastError();
-	if (error != 0)
-	{
-		MessageBox(NULL, std::to_wstring(error).c_str(), L"Ошибка", MB_ICONERROR);
-	}
-	else
-	{
-		MessageBox(NULL, L"Ошибок нет", L"Предупреждение", MB_ICONINFORMATION);
-	}
-	
-}
-
-
-
-=======
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 int NIA::to_integer(wstring str)
 {
 	return stoi(str);
@@ -537,8 +298,6 @@ wstring NIA::to_wstring(float num, int accuracy)
 	return str.substr(0, str.find('.') + accuracy + 1);
 }
 
-<<<<<<< HEAD
-=======
 wstring NIA::to_wstring(string str)
 {
 	setlocale(LC_ALL, "ru-RU.utf-8");
@@ -551,7 +310,6 @@ wstring NIA::to_wstring(string str)
 	return wstr;
 }
 
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 
 vector<wstring>* NIA::to_wstring(vector<int>* nums)
 {
@@ -638,10 +396,6 @@ vector<string>* NIA::split(string str, char symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
-<<<<<<< HEAD
-			temp = "";
-=======
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		}
 		else
 		{
@@ -649,11 +403,7 @@ vector<string>* NIA::split(string str, char symbol)
 		}
 	}
 
-<<<<<<< HEAD
-	if (temp != "")
-=======
 	if (!temp.empty())
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -690,10 +440,6 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 		{
 			result->push_back(temp);
 			temp.clear();
-<<<<<<< HEAD
-			temp = "";
-=======
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 			is_sep = false;
 		}
 		else
@@ -703,11 +449,7 @@ vector<string>* NIA::split(string str, string pattern, char separator)
 
 	}
 
-<<<<<<< HEAD
-	if (temp != "")
-=======
 	if (!temp.empty())
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -726,10 +468,6 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		{
 			result->push_back(temp);
 			temp.clear();
-<<<<<<< HEAD
-			temp = L"";
-=======
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		}
 		else
 		{
@@ -737,14 +475,8 @@ vector<wstring>* NIA::split(wstring str, wchar_t symbol)
 		}
 	}
 
-<<<<<<< HEAD
-	if (temp != L"")
-=======
 	if (!temp.empty())
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
-		result->push_back(temp);
-
-	return result;
+	    return result;
 }
 
 vector<wstring>* NIA::split(wchar_t* str, wchar_t symbol)
@@ -776,10 +508,6 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 		{
 			result->push_back(temp);
 			temp.clear();
-<<<<<<< HEAD
-			temp = L"";
-=======
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 			is_sep = false;
 		}
 		else
@@ -789,11 +517,8 @@ vector<wstring>* NIA::split(wstring str, wstring pattern, wchar_t separator)
 
 	}
 
-<<<<<<< HEAD
+
 	if (temp != L"")
-=======
-	if (!temp.empty())
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d
 		result->push_back(temp);
 
 	return result;
@@ -830,7 +555,7 @@ vector<Point>* Point::to_points(vector<int>* points)
 
 	if (points->size() % 2)
 	{
-		MessageBox(NULL, L"Количество координат не кратно 2, последняя координата будет удалена ", L"Предупреждение", MB_ICONINFORMATION);
+		MessageBox(NULL, L"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ", L"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", MB_ICONINFORMATION);
 		points->pop_back();
 	}
 	
@@ -854,7 +579,7 @@ vector<Point2D>* Point2D::to_points(vector<double>* points)
 
 	if (points->size() % 2)
 	{
-		MessageBox(NULL, L"Количество координат не кратно 2, последняя координата будет удалена ", L"Предупреждение", MB_ICONINFORMATION);
+		MessageBox(NULL, L"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 2, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ", L"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", MB_ICONINFORMATION);
 		points->pop_back();
 	}
 
@@ -888,9 +613,6 @@ HexColor NIA::rgb(unsigned char r, unsigned char g, unsigned char b)
 	bgr_color = r | (g << 8) | (b << 16);
 
 	return bgr_color;
-<<<<<<< HEAD
-}
-=======
 }
 
 bool NIA::is_number(string str)
@@ -930,4 +652,3 @@ bool NIA::is_number(const wchar_t* str)
 	wstring str1(str);
 	return is_number(str1);
 }
->>>>>>> 0902d78024232a5ec8e9cd8246f5b686ad75716d

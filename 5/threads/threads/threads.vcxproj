@@ -18,44 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\NIA\includes\NIA.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_csv.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp" />
-    <ClCompile Include="modules\app\app.cpp" />
-    <ClCompile Include="modules\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\NIA\includes\NIA_csv.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_error.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_file.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_listview.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_statusbar.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h" />
-    <ClInclude Include="..\..\..\NIA\includes\table\table.h" />
-    <ClInclude Include="modules\app\app.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B20DE592-8D55-4414-A656-5DC1E3331F4F}</ProjectGuid>
-    <RootNamespace>Students</RootNamespace>
+    <ProjectGuid>{15BE3AE2-1E93-41CA-943B-6982C6715088}</ProjectGuid>
+    <RootNamespace>threads</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,7 +36,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -104,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Programming\HLProgramming\NIA\includes;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Programming\HLProgramming\lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +81,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -159,6 +124,22 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\lib\lib-file.cpp" />
+    <ClCompile Include="..\..\..\lib\lib-font.cpp" />
+    <ClCompile Include="..\..\..\lib\lib-rect.cpp" />
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\lib\lib-event.h" />
+    <ClInclude Include="..\..\..\lib\lib-file.h" />
+    <ClInclude Include="..\..\..\lib\lib-font.h" />
+    <ClInclude Include="..\..\..\lib\lib-main.h" />
+    <ClInclude Include="..\..\..\lib\lib-rect.h" />
+    <ClInclude Include="..\..\..\lib\lib.h" />
+    <ClInclude Include="app.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

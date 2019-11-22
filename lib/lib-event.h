@@ -1,10 +1,10 @@
 #pragma once
 
-#include "NIA_main.h"
+#include "lib-main.h"
 
-namespace NIA
+namespace lib
 {
-	
+
 struct Event
 {
 	HWND hwnd;
