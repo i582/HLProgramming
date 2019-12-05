@@ -18,45 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\NIA\includes\NIA.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_csv.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_draw.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_error.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_errors.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_file.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_font.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_image.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__header_item.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_listview__row_item.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_mouse.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_render.cpp" />
-    <ClCompile Include="..\..\..\NIA\includes\NIA_statusbar.cpp" />
-    <ClCompile Include="modules\app\app.cpp" />
-    <ClCompile Include="modules\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\NIA\includes\NIA_csv.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_error.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_event.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_file.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_image.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_listview.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_render.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_statusbar.h" />
-    <ClInclude Include="..\..\..\NIA\includes\NIA_utils.h" />
-    <ClInclude Include="..\..\..\NIA\includes\table\table.h" />
-    <ClInclude Include="modules\app\app.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B20DE592-8D55-4414-A656-5DC1E3331F4F}</ProjectGuid>
-    <RootNamespace>Students</RootNamespace>
+    <ProjectGuid>{D530A589-9708-48CB-BDDE-ECBC64DE7922}</ProjectGuid>
+    <RootNamespace>tables</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -64,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -104,15 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Programming\HLProgramming\NIA\includes;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,6 +124,38 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="editor\editor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="winlib\winlib_csv.cpp" />
+    <ClCompile Include="winlib\winlib_file.cpp" />
+    <ClCompile Include="winlib\winlib_image.cpp" />
+    <ClCompile Include="winlib\winlib_menu.cpp" />
+    <ClCompile Include="winlib\winlib_rect.cpp" />
+    <ClCompile Include="winlib\winlib_statusbar.cpp" />
+    <ClCompile Include="winlib\winlib_table.cpp" />
+    <ClCompile Include="winlib\winlib_table_collumn.cpp" />
+    <ClCompile Include="winlib\winlib_table_item.cpp" />
+    <ClCompile Include="winlib\winlib_table_row.cpp" />
+    <ClCompile Include="winlib\winlib_utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="editor\editor.h" />
+    <ClInclude Include="winlib\winlib.h" />
+    <ClInclude Include="winlib\winlib_csv.h" />
+    <ClInclude Include="winlib\winlib_event.h" />
+    <ClInclude Include="winlib\winlib_file.h" />
+    <ClInclude Include="winlib\winlib_image.h" />
+    <ClInclude Include="winlib\winlib_main.h" />
+    <ClInclude Include="winlib\winlib_menu.h" />
+    <ClInclude Include="winlib\winlib_rect.h" />
+    <ClInclude Include="winlib\winlib_statusbar.h" />
+    <ClInclude Include="winlib\winlib_table.h" />
+    <ClInclude Include="winlib\winlib_table_collumn.h" />
+    <ClInclude Include="winlib\winlib_table_item.h" />
+    <ClInclude Include="winlib\winlib_table_row.h" />
+    <ClInclude Include="winlib\winlib_utils.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -107,6 +107,9 @@
     <ClInclude Include="..\..\..\NIA\includes\table\table.h">
       <Filter>Исходные файлы\NIA\table</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\NIA\includes\NIA_event.h">
+      <Filter>Исходные файлы\NIA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

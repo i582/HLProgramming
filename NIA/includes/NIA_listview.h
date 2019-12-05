@@ -52,7 +52,7 @@ public:
 	void add_group(wstring text, int group_id);
 
 
-};
+}; 
 
 
 #define InitListViewEvent(list, comp_func) \
