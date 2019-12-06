@@ -12,7 +12,7 @@ Editor* Editor::get_instance()
 
 Editor::Editor()
 {
-	this->size = { 100, 100, 1300, 700 };
+	this->size = { 20, 20, 1100, 1000 };
 
 	// window part
 	this->msg = {};
@@ -99,28 +99,134 @@ void Editor::setup()
 
 	winlib::csv new_csv("./data.csv", ';', winlib::csv_property::USE_FIRST_LINE_AS_TITLE);
 	
-
-
-	winlib::csv sort_csv = new_csv.sort(1, winlib::csv_sort_item_type::STRING, winlib::csv_sort_type::ASC);
-
-	winlib::csv math_csv = new_csv
-		.sort(2, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
-		.select_collumns({ 0, 1, 2, 3, 4 })
-		//.select_rows(0, 10)
-		.add_collumn("full")
+	new_csv
+		.add_collumn("Общий")
 		.fill_collumn(-1, [](winlib::csv_line line) -> std::string
 		{
-			return std::to_string( stoi(line->at(2)) + stoi(line->at(3)) + stoi(line->at(4)));
-		})
+			return std::to_string(stoi(line->at(2)) + stoi(line->at(3)) + stoi(line->at(4)));
+		});
+
+	winlib::csv math_csv = new_csv.copy();
+	math_csv = math_csv
+		.select_collumns({ 0, 1, 2 })
+		.sort(2, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+		.select_rows(0, 10);
+
+	winlib::csv english_csv = new_csv.copy();
+	english_csv = english_csv
+		.select_collumns({ 0, 1, 3 })
+		.sort(2, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+		.select_rows(0, 10);
+
+	winlib::csv russian_csv = new_csv.copy();
+	russian_csv = russian_csv
+		.select_collumns({ 0, 1, 4 })
+		.sort(2, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+		.select_rows(0, 10);
+
+
+	winlib::csv best_csv = new_csv.copy();
+	best_csv = best_csv
 		.sort(-1, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+		.select_rows(0, 10);
+
+
+	winlib::csv success_csv = new_csv.copy();
+	success_csv = success_csv
 		.filter(-1, [](std::string value) -> bool
 		{
 			return stoi(value) > 240;
-		});
+		})
+		.sort(-1, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC);
+
+	//winlib::csv math_csv = new_csv
+	//	.sort(2, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+	//	.select_collumns({ 0, 1, 2, 3, 4 })
+	//	//.select_rows(0, 10)
+	//	.add_collumn("full")
+	//	.fill_collumn(-1, [](winlib::csv_line line) -> std::string
+	//	{
+	//		return std::to_string( stoi(line->at(2)) + stoi(line->at(3)) + stoi(line->at(4)));
+	//	})
+	//	.sort(-1, winlib::csv_sort_item_type::INT, winlib::csv_sort_type::DESC)
+	//	.filter(-1, [](std::string value) -> bool
+	//	{
+	//		return stoi(value) > 240;
+	//	});
 
 
-	mainTable = new winlib::Table(hwnd, { 10, 50, 530, 400 }, 107, math_csv);
+	/*label1 = CreateWindow("STATIC",
+	"fasfs", WS_CHILD | WS_VISIBLE,
+	10, 70, 100, 30, hwnd, (HMENU)1, nullptr, nullptr);
+	HDC hdc_1 = GetDC(label1);
 
+	SetBkColor(hdc_1, 0xff00ffff);
+	
+	MessageBox(NULL, "text", std::to_string(SetBkMode(hdc_1, TRANSPARENT)).c_str(), MB_ICONINFORMATION);*/
+
+	mainTable = new winlib::Table(hwnd, { 10, 100, 600, 200 }, 107, new_csv);
+
+	mainTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	mainTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	mainTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+	mainTable->setCollumnSortFunction(3, winlib::TableSort::numberASC);
+	mainTable->setCollumnSortFunction(4, winlib::TableSort::numberASC);
+	mainTable->setCollumnSortFunction(5, winlib::TableSort::numberASC);
+
+	mainTable->setCollumnWidth({ 30, 200, 100, 100, 100, 70 });
+
+
+
+	mathTable = new winlib::Table(hwnd, { 620, 50, 330, 100 }, 108, math_csv);
+
+	mathTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	mathTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	mathTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+
+	mathTable->setCollumnWidth({ 30, 200, 100 });
+
+
+	englishTable = new winlib::Table(hwnd, { 620, 170, 330, 100 }, 109, english_csv);
+
+	englishTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	englishTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	englishTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+
+	englishTable->setCollumnWidth({ 30, 200, 100 });
+
+
+	russianTable = new winlib::Table(hwnd, { 620, 290, 330, 100 }, 110, russian_csv);
+
+	russianTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	russianTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	russianTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+
+	russianTable->setCollumnWidth({ 30, 200, 100 });
+
+
+	bestTable = new winlib::Table(hwnd, { 10, 260, 600, 200 }, 111, best_csv);
+
+	bestTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	bestTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	bestTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+	bestTable->setCollumnSortFunction(3, winlib::TableSort::numberASC);
+	bestTable->setCollumnSortFunction(4, winlib::TableSort::numberASC);
+	bestTable->setCollumnSortFunction(5, winlib::TableSort::numberASC);
+
+	bestTable->setCollumnWidth({ 30, 200, 100, 100, 100, 70 });
+
+
+
+	successTable = new winlib::Table(hwnd, { 620, 950, 600, 400 }, 112, success_csv);
+
+	successTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	successTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	successTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+	successTable->setCollumnSortFunction(3, winlib::TableSort::numberASC);
+	successTable->setCollumnSortFunction(4, winlib::TableSort::numberASC);
+	successTable->setCollumnSortFunction(5, winlib::TableSort::numberASC);
+
+	successTable->setCollumnWidth({ 30, 200, 100, 100, 100, 70 });
 	/*mainTable->openCSV("./data.csv", ';', winlib::TableCSV::USE_FIRST_LINE_AS_TITLE);
 
 	mainTable->setCollumnSortFunction(0, winlib::TableSort::numberASC);
@@ -128,7 +234,7 @@ void Editor::setup()
 	mainTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
 	mainTable->setCollumnSortFunction(3, winlib::TableSort::numberASC);*/
 
-	mainTable->setCollumnWidth({ 30, 200, 100 });
+	
 	
 	//mainTable.addRow({ "sfs", "fasfas" });
 
@@ -151,6 +257,10 @@ void Editor::setup()
 
 	SendMessage(toolbar, TB_AUTOSIZE, 0, 0);
 	ShowWindow(toolbar, true);
+
+
+
+	//font = winlib::Font::open("OpenSans", 13);
 }
 
 int Editor::run()
@@ -201,6 +311,10 @@ LRESULT Editor::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		HDC hdc_temp = BeginPaint(hwnd, &ps);
 
+
+		//winlib::Draw::text(hdc_temp, font, "Привет мир!", { 10, 70, 100, 30 });
+		
+
 		EndPaint(hwnd, &ps);
 		return 0;
 	}
@@ -214,6 +328,14 @@ LRESULT Editor::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_NOTIFY:
 	{
 		mainTable->handleSort(lParam);
+
+		bestTable->handleSort(lParam);
+
+		successTable->handleSort(lParam);
+
+		mathTable->handleSort(lParam);
+		englishTable->handleSort(lParam);
+		russianTable->handleSort(lParam);
 
 		return 0;
 	}
@@ -241,12 +363,15 @@ LRESULT Editor::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_SIZE:
 	{
 		SendMessage(statusBar->getHwnd(), WM_SIZE, 0, 0);
+		SendMessage(toolbar, WM_SIZE, 0, 0);
 		break;
 	}
 
-	}
+
 
 
 
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+	}
+
 }

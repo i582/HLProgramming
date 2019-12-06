@@ -68,5 +68,7 @@ namespace winlib
 		csv& fill_collumn(size_t collumn, std::function<string(csv_line)>);
 
 		csv& filter(size_t collumn, std::function<bool(string)>);
+
+		csv& copy();
 	};
 }

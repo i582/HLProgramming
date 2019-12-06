@@ -128,7 +128,9 @@
     <ClCompile Include="editor\editor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="winlib\winlib_csv.cpp" />
+    <ClCompile Include="winlib\winlib_draw.cpp" />
     <ClCompile Include="winlib\winlib_file.cpp" />
+    <ClCompile Include="winlib\winlib_font.cpp" />
     <ClCompile Include="winlib\winlib_image.cpp" />
     <ClCompile Include="winlib\winlib_menu.cpp" />
     <ClCompile Include="winlib\winlib_rect.cpp" />
@@ -143,8 +145,10 @@
     <ClInclude Include="editor\editor.h" />
     <ClInclude Include="winlib\winlib.h" />
     <ClInclude Include="winlib\winlib_csv.h" />
+    <ClInclude Include="winlib\winlib_draw.h" />
     <ClInclude Include="winlib\winlib_event.h" />
     <ClInclude Include="winlib\winlib_file.h" />
+    <ClInclude Include="winlib\winlib_font.h" />
     <ClInclude Include="winlib\winlib_image.h" />
     <ClInclude Include="winlib\winlib_main.h" />
     <ClInclude Include="winlib\winlib_menu.h" />

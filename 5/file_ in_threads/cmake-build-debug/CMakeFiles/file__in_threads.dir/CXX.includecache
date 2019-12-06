@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/app.cpp
+app.h
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/app.h
+
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/app.h
+windows.h
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/windows.h
+string
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/string
+
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/main.cpp
+winlib_file.h
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/winlib_file.h
+app.h
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/app.h
+
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/winlib_file.h
+iostream
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/iostream
+windows.h
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/windows.h
+string
+/cygdrive/e/Programming/HLProgramming/5/file_ in_threads/string
+

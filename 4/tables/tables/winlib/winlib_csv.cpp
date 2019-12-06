@@ -226,3 +226,8 @@ winlib::csv& winlib::csv::filter(size_t collumn, std::function<bool(string)> cal
 
 	return *new csv(header, new_matrix);
 }
+
+winlib::csv& winlib::csv::copy()
+{
+	return *new csv(header, matrix);
+}

@@ -1,6 +1,6 @@
 #include "lib-file.h"
 
-HANDLE lib::File::open(const std::wstring& path, DWORD openType, DWORD dwAccess, DWORD dwShareMode)
+HANDLE lib::File::open(const std::string& path, DWORD openType, DWORD dwAccess, DWORD dwShareMode)
 {
 	return CreateFile(path.c_str(), dwAccess, dwShareMode, NULL, openType, FILE_ATTRIBUTE_NORMAL, NULL);
 }
@@ -35,13 +35,13 @@ DWORD lib::File::write(HANDLE file, char* buffer, size_t count)
 	return count_write;
 }
 
-std::wstring lib::File::openDialog(HWND hwnd, LPCWSTR filter)
+std::string lib::File::openDialog(HWND hwnd, LPCSTR filter)
 {
 	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
 	if (of == nullptr)
-		return L"";
+		return "";
 
-	WCHAR path[255] = L"\0";
+	CHAR path[255] = "\0";
 
 	of->lStructSize = sizeof(OPENFILENAME);
 	of->hwndOwner = hwnd;
@@ -68,20 +68,20 @@ std::wstring lib::File::openDialog(HWND hwnd, LPCWSTR filter)
 	GetOpenFileName(of);
 
 
-	std::wstring path_string = path;
+	std::string path_string = path;
 
 	free(of);
 
 	return path_string;
 }
 
-std::wstring lib::File::saveDialog(HWND hwnd, LPCWSTR filter)
+std::string lib::File::saveDialog(HWND hwnd, LPCSTR filter)
 {
 	OPENFILENAME* of = (OPENFILENAME*)calloc(1, sizeof(OPENFILENAME));
 	if (of == nullptr)
-		return L"";
+		return "";
 
-	WCHAR path[255] = L"\0";
+	CHAR path[255] = "\0";
 
 	of->lStructSize = sizeof(OPENFILENAME);
 	of->hwndOwner = hwnd;
@@ -108,16 +108,16 @@ std::wstring lib::File::saveDialog(HWND hwnd, LPCWSTR filter)
 	GetSaveFileName(of);
 
 
-	std::wstring path_string = path;
+	std::string path_string = path;
 
 	free(of);
 
 	return path_string;
 }
 
-void* lib::File::readFromDialogFile(HWND hwnd, LPCWSTR filter)
+void* lib::File::readFromDialogFile(HWND hwnd, LPCSTR filter)
 {
-	std::wstring path = lib::File::openDialog(hwnd, filter);
+	std::string path = lib::File::openDialog(hwnd, filter);
 	HANDLE file = lib::File::open(path);
 
 	void* buffer = lib::File::read(file);
@@ -126,9 +126,9 @@ void* lib::File::readFromDialogFile(HWND hwnd, LPCWSTR filter)
 	return buffer;
 }
 
-void lib::File::writeToDialogFile(HWND hwnd, LPCWSTR filter, char* buffer, size_t count)
+void lib::File::writeToDialogFile(HWND hwnd, LPCSTR filter, char* buffer, size_t count)
 {
-	std::wstring path = lib::File::saveDialog(hwnd, filter);
+	std::string path = lib::File::saveDialog(hwnd, filter);
 	HANDLE file = lib::File::open(path, OPEN_ALWAYS);
 
 	lib::File::write(file, buffer, count);

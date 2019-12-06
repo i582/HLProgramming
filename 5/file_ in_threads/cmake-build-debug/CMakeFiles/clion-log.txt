@@ -1,0 +1,4 @@
+C:\cygwin64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=make -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "CodeBlocks - Unix Makefiles" "/cygdrive/e/Programming/HLProgramming/5/file_ in_threads"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/e/Programming/HLProgramming/5/file_ in_threads/cmake-build-debug

@@ -60,6 +60,12 @@
     <ClCompile Include="winlib\winlib_csv.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="winlib\winlib_font.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="winlib\winlib_draw.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="editor\editor.h">
@@ -105,6 +111,12 @@
       <Filter>Исходные файлы\winlib</Filter>
     </ClInclude>
     <ClInclude Include="winlib\winlib_csv.h">
+      <Filter>Исходные файлы\winlib</Filter>
+    </ClInclude>
+    <ClInclude Include="winlib\winlib_draw.h">
+      <Filter>Исходные файлы\winlib</Filter>
+    </ClInclude>
+    <ClInclude Include="winlib\winlib_font.h">
       <Filter>Исходные файлы\winlib</Filter>
     </ClInclude>
   </ItemGroup>

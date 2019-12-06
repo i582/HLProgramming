@@ -18,12 +18,25 @@ public:
 	winlib::Menu* menu;
 	winlib::StatusBar* statusBar;
 	winlib::Table* mainTable;
+
+	winlib::Table* bestTable;
+
+	winlib::Table* successTable;
+
+	winlib::Table* mathTable;
+	winlib::Table* englishTable;
+	winlib::Table* russianTable;
+
+	HFONT font;
+
 	MSG msg;
 	HWND hwnd;
 	HDC hdc;
 	WNDCLASSEX wc;
 	PAINTSTRUCT ps;
 	HWND toolbar;
+
+	HWND label1;
 
 
 public:

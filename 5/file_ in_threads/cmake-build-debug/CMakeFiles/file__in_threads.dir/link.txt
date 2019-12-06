@@ -1,0 +1,1 @@
+/usr/bin/g++.exe -g  -Wl,--enable-auto-import CMakeFiles/file__in_threads.dir/main.cpp.o CMakeFiles/file__in_threads.dir/winlib_file.cpp.o CMakeFiles/file__in_threads.dir/app.cpp.o  -o file__in_threads.exe -Wl,--out-implib,libfile__in_threads.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,-Bstatic -lcomdlg32 -lgdi32 -Wl,-Bdynamic 
