@@ -28,6 +28,8 @@ public:
 	winlib::Table* russianTable;
 
 	winlib::Table* groupsTable;
+	
+	winlib::Table* groupsAverageTable;
 
 	double procent;
 	int aver_bal;

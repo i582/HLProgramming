@@ -83,7 +83,7 @@ void Editor::setup()
 	
 		setupTables(path);
 	});
-
+	
 
 	//mainTable = new winlib::Table(hwnd, { 10, 50, 530, 400 }, 107);
 
@@ -365,6 +365,28 @@ void Editor::setupTables(std::string path_to_csv)
 
 
 	
+	groupsAverageTable = new winlib::Table(hwnd, { 620, 430, 330, 150 }, 11111);
+
+	groupsAverageTable->addGroup("", 10);
+
+	groupsAverageTable->addCollumn("#", 0, 100);
+	groupsAverageTable->addCollumn("Ãðóïïà", 1, 100);
+	groupsAverageTable->addCollumn("Ñð. Á", 2, 100);
+
+	int i = 0;
+	for (auto& group : average_by_groups)
+	{
+		groupsAverageTable->addRow({ std::to_string(i + 1), "Ãðóïïà " + std::to_string(i + 1), std::to_string(group) }, 10);
+
+		i++;
+	}
+
+	groupsAverageTable->setCollumnSortFunction(0, winlib::TableSort::numberDESC);
+	groupsAverageTable->setCollumnSortFunction(1, winlib::TableSort::stringDESC);
+	groupsAverageTable->setCollumnSortFunction(2, winlib::TableSort::numberASC);
+
+
+	groupsAverageTable->setCollumnWidth({ 30, 200, 100 });
 
 	InvalidateRect(hwnd, NULL, TRUE);
 }
