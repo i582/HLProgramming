@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/i582/HLProgramming/badge.svg?branch=master)](https://coveralls.io/github/i582/HLProgramming?branch=master)
+
 # Программирование на языке высокого уровня (ЯВУ). 2 семестр. Спирин Д.О.
 
 ## 1 лабораторная работа
